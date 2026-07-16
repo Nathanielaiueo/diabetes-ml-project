@@ -382,7 +382,7 @@ def build_cover():
         ('Semester', 'Genap 2025/2026'),
         ('Universitas', 'Universitas Dian Nuswantoro (UDINUS) Semarang'),
         ('Program Studi', 'Teknik Informatika (S1)'),
-        ('Dosen Pengampu', 'Ardytha Luthfiarta, M.Kom, MCS'),
+        ('Dosen Pengampu', 'Prof. Ir. Heru Agus Santoso, Ph.D, IPM, ASEAN Eng.'),
         ('Tanggal', '17 Juli 2026'),
     ]
     story.append(info_table(meta_rows, col_w=[4.8*cm, AVAIL_W - 4.8*cm]))
@@ -604,15 +604,30 @@ def build_content():
         'Dataset yang digunakan adalah <b>Pima Indians Diabetes Database</b> yang '
         'tersedia secara publik dan dapat diunduh melalui tiga sumber resmi berikut:'
     ))
+    # Link style: display text pendek agar muat 1 baris & fully clickable
+    LINK_STYLE = ParagraphStyle(
+        'LinkCell', fontSize=9, leading=13, textColor=HexColor('#1565C0'),
+        fontName='Helvetica', alignment=TA_LEFT,
+    )
     src_data = [
         [Paragraph('<b>Sumber</b>', ST['TableHeader']),
-         Paragraph('<b>Tautan (URL)</b>', ST['TableHeader'])],
+         Paragraph('<b>Tautan (URL) — Klik untuk Membuka</b>', ST['TableHeader'])],
         [Paragraph('UCI Machine Learning Repository', ST['TableCellL']),
-         Paragraph('https://archive.ics.uci.edu/dataset/34/diabetes', ST['TableCellL'])],
+         Paragraph(
+             '<a href="https://archive.ics.uci.edu/dataset/34/diabetes" color="#1565C0">'
+             '<u>archive.ics.uci.edu/dataset/34/diabetes</u></a>',
+             LINK_STYLE)],
         [Paragraph('Kaggle Dataset', ST['TableCellL']),
-         Paragraph('https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database', ST['TableCellL'])],
+         Paragraph(
+             '<a href="https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database" color="#1565C0">'
+             '<u>kaggle.com/datasets/uciml/pima-indians-diabetes-database</u></a>',
+             LINK_STYLE)],
         [Paragraph('Jason Brownlee GitHub', ST['TableCellL']),
-         Paragraph('https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv', ST['TableCellL'])],
+         Paragraph(
+             '<a href="https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv" color="#1565C0">'
+             '<u>raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv</u></a>',
+             ParagraphStyle('LinkCellSm', fontSize=8, leading=12, textColor=HexColor('#1565C0'),
+                            fontName='Helvetica', alignment=TA_LEFT))],
     ]
     src_tbl = Table(src_data, colWidths=[4.5*cm, AVAIL_W - 4.5*cm])
     src_tbl.setStyle(TableStyle([
@@ -1063,48 +1078,103 @@ def build_content():
     story.append(section_header('5', 'REFERENSI'))
     story.append(sp(0.3))
 
-    refs = [
-        ('[1] Smith, J.W., Everhart, J.E., Dickson, W.C., Knowler, W.C., & Johannes, R.S. (1988). '
-         '<i>Using the ADAP learning algorithm to forecast the onset of diabetes mellitus.</i> '
-         'Proceedings of the Annual Symposium on Computer Application in Medical Care, 261\u2013265.'),
-        ('[2] Pedregosa, F., Varoquaux, G., Gramfort, A., et al. (2011). '
-         '<i>Scikit-learn: Machine Learning in Python.</i> '
-         'Journal of Machine Learning Research, 12, 2825\u20132830.'),
-        ('[3] International Diabetes Federation. (2021). '
-         '<i>IDF Diabetes Atlas, 10th Edition.</i> Brussels, Belgium: IDF. '
-         'https://diabetesatlas.org'),
-        ('[4] Breiman, L. (2001). '
-         '<i>Random Forests.</i> '
-         'Machine Learning, 45(1), 5\u201332. https://doi.org/10.1023/A:1010933404324'),
-        ('[5] Friedman, J.H. (2001). '
-         '<i>Greedy Function Approximation: A Gradient Boosting Machine.</i> '
-         'The Annals of Statistics, 29(5), 1189\u20131232.'),
-        ('[6] Hosmer, D.W., & Lemeshow, S. (2000). '
-         '<i>Applied Logistic Regression (2nd ed.).</i> New York: John Wiley & Sons.'),
-        ('[7] James, G., Witten, D., Hastie, T., & Tibshirani, R. (2021). '
-         '<i>An Introduction to Statistical Learning with Applications in R (2nd ed.).</i> '
-         'New York: Springer. https://www.statlearning.com'),
-        ('[8] Streamlit Inc. (2024). '
-         '<i>Streamlit \u2014 The fastest way to build data apps.</i> '
-         'Retrieved from https://streamlit.io'),
-        ('[9] Kementerian Kesehatan RI. (2018). '
-         '<i>Hasil Utama Riset Kesehatan Dasar (Riskesdas) 2018.</i> '
-         'Badan Penelitian dan Pengembangan Kesehatan.'),
-        ('[10] American Diabetes Association. (2023). '
-         '<i>Standards of Medical Care in Diabetes 2023.</i> '
-         'Diabetes Care, 46(Supplement 1).'),
-        ('[11] Lundberg, S.M., & Lee, S.I. (2017). '
-         '<i>A unified approach to interpreting model predictions.</i> '
-         'Advances in Neural Information Processing Systems, 30, 4765\u20134774.'),
-        ('[12] WHO. (2023). <i>Obesity and overweight.</i> '
-         'WHO Fact Sheet. https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight'),
-    ]
-    for r in refs:
-        story.append(Paragraph(r, ParagraphStyle(
-            'ref', fontSize=9, leading=14, textColor=black,
-            fontName='Helvetica', spaceAfter=6, leftIndent=18,
-            firstLineIndent=-18, alignment=TA_JUSTIFY
-        )))
+    REFF = ParagraphStyle(
+        'ref2', fontSize=9, leading=14, textColor=black,
+        fontName='Helvetica', spaceAfter=2, leftIndent=18,
+        firstLineIndent=-18, alignment=TA_JUSTIFY
+    )
+    REFL = ParagraphStyle(
+        'reflink2', fontSize=9, leading=13, textColor=HexColor('#1565C0'),
+        fontName='Helvetica', spaceAfter=6, leftIndent=18,
+    )
+    def ref(text): return Paragraph(text, REFF)
+    def ref_url(url): return Paragraph(
+        '<a href="' + url + '" color="#1565C0"><u>' + url + '</u></a>', REFL)
+
+    story.append(ref(
+        '[1] Smith, J.W., Everhart, J.E., Dickson, W.C., Knowler, W.C., &amp; Johannes, R.S. (1988). '
+        '<i>Using the ADAP learning algorithm to forecast the onset of diabetes mellitus.</i> '
+        'Proc. Annual Symposium on Computer Application in Medical Care (SCAMC), 261\u2013265. PubMed PMCID: PMC2245318.'
+    ))
+    story.append(ref_url('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2245318/'))
+
+    story.append(ref(
+        '[2] Pedregosa, F., Varoquaux, G., Gramfort, A., et al. (2011). '
+        '<i>Scikit-learn: Machine Learning in Python.</i> '
+        'Journal of Machine Learning Research, 12, 2825\u20132830.'
+    ))
+    story.append(ref_url('https://jmlr.org/papers/v12/pedregosa11a.html'))
+
+    story.append(ref(
+        '[3] International Diabetes Federation. (2021). '
+        '<i>IDF Diabetes Atlas, 10th Edition.</i> Brussels, Belgium: IDF.'
+    ))
+    story.append(ref_url('https://diabetesatlas.org'))
+
+    story.append(ref(
+        '[4] Breiman, L. (2001). <i>Random Forests.</i> Machine Learning, 45(1), 5\u201332.'
+    ))
+    story.append(ref_url('https://doi.org/10.1023/A:1010933404324'))
+
+    story.append(ref(
+        '[5] Friedman, J.H. (2001). '
+        '<i>Greedy Function Approximation: A Gradient Boosting Machine.</i> '
+        'The Annals of Statistics, 29(5), 1189\u20131232.'
+    ))
+    story.append(ref_url('https://doi.org/10.1214/aos/1013203451'))
+
+    story.append(ref(
+        '[6] Hosmer, D.W., &amp; Lemeshow, S. (2000). '
+        '<i>Applied Logistic Regression (2nd ed.).</i> '
+        'New York: John Wiley &amp; Sons. ISBN: 978-0-471-35632-5.'
+    ))
+
+    story.append(ref(
+        '[7] James, G., Witten, D., Hastie, T., &amp; Tibshirani, R. (2021). '
+        '<i>An Introduction to Statistical Learning with Applications in R (2nd ed.).</i> '
+        'New York: Springer.'
+    ))
+    story.append(ref_url('https://www.statlearning.com'))
+
+    story.append(ref(
+        '[8] Streamlit Inc. (2024). '
+        '<i>Streamlit \u2014 The fastest way to build data apps.</i>'
+    ))
+    story.append(ref_url('https://streamlit.io'))
+
+    story.append(ref(
+        '[9] Kementerian Kesehatan RI. (2018). '
+        '<i>Hasil Utama Riset Kesehatan Dasar (Riskesdas) 2018.</i> '
+        'Badan Penelitian dan Pengembangan Kesehatan, Jakarta.'
+    ))
+    story.append(ref_url('https://kesmas.kemkes.go.id/assets/upload/dir_519d41d8cd98f00/files/Hasil-riskesdas-2018_1274.pdf'))
+
+    story.append(ref(
+        '[10] American Diabetes Association. (2023). '
+        '<i>Standards of Medical Care in Diabetes 2023.</i> '
+        'Diabetes Care, 46(Supplement 1).'
+    ))
+    story.append(ref_url('https://doi.org/10.2337/dc23-Sint'))
+
+    story.append(ref(
+        '[11] Lundberg, S.M., &amp; Lee, S.I. (2017). '
+        '<i>A unified approach to interpreting model predictions.</i> '
+        'Advances in Neural Information Processing Systems (NeurIPS), 30, 4765\u20134774.'
+    ))
+    story.append(ref_url('https://proceedings.neurips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html'))
+
+    story.append(ref(
+        '[12] World Health Organization. (2024). '
+        '<i>Obesity and overweight.</i> WHO Fact Sheet.'
+    ))
+    story.append(ref_url('https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight'))
+
+    story.append(ref(
+        '[13] Dua, D., &amp; Graff, C. (2019). '
+        '<i>UCI Machine Learning Repository.</i> '
+        'Irvine, CA: University of California, School of Information and Computer Science.'
+    ))
+    story.append(ref_url('https://archive.ics.uci.edu/dataset/34/diabetes'))
 
     story.append(sp(1.0))
     story.append(HRFlowable(width='100%', thickness=2, color=C_PRIMARY))
