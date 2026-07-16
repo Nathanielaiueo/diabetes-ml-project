@@ -1,0 +1,33 @@
+{
+  "feature_names": [
+    "Pregnancies",
+    "Glucose",
+    "BloodPressure",
+    "SkinThickness",
+    "Insulin",
+    "BMI",
+    "DiabetesPedigreeFunction",
+    "Age",
+    "BMI_Category",
+    "Glucose_Category",
+    "Age_Group",
+    "Insulin_Glucose_Ratio"
+  ],
+  "original_features": [
+    "Pregnancies",
+    "Glucose",
+    "BloodPressure",
+    "SkinThickness",
+    "Insulin",
+    "BMI",
+    "DiabetesPedigreeFunction",
+    "Age"
+  ],
+  "engineered_features": [
+    "BMI_Category",
+    "Glucose_Category",
+    "Age_Group",
+    "Insulin_Glucose_Ratio"
+  ],
+  "n_features": 12
+}

@@ -1,0 +1,106 @@
+{
+  "logistic_regression": {
+    "feature_names": [
+      "Pregnancies",
+      "Glucose",
+      "BloodPressure",
+      "SkinThickness",
+      "Insulin",
+      "BMI",
+      "DiabetesPedigreeFunction",
+      "Age",
+      "BMI_Category",
+      "Glucose_Category",
+      "Age_Group",
+      "Insulin_Glucose_Ratio"
+    ],
+    "coefficients": [
+      0.12893817886423298,
+      0.34973408129339806,
+      0.04712500339408102,
+      0.17353015198443011,
+      0.22686938338871,
+      0.1573580664069098,
+      0.09518130414945367,
+      0.11660047492182539,
+      0.12799956669953497,
+      0.2085661631055172,
+      0.08795317948940395,
+      0.18410047307257174
+    ],
+    "abs_coefficients": [
+      0.12893817886423298,
+      0.34973408129339806,
+      0.04712500339408102,
+      0.17353015198443011,
+      0.22686938338871,
+      0.1573580664069098,
+      0.09518130414945367,
+      0.11660047492182539,
+      0.12799956669953497,
+      0.2085661631055172,
+      0.08795317948940395,
+      0.18410047307257174
+    ]
+  },
+  "random_forest": {
+    "feature_names": [
+      "Pregnancies",
+      "Glucose",
+      "BloodPressure",
+      "SkinThickness",
+      "Insulin",
+      "BMI",
+      "DiabetesPedigreeFunction",
+      "Age",
+      "BMI_Category",
+      "Glucose_Category",
+      "Age_Group",
+      "Insulin_Glucose_Ratio"
+    ],
+    "importances": [
+      0.026773624894049233,
+      0.13323210974697305,
+      0.02928333634399897,
+      0.11962211290388924,
+      0.3437261175819968,
+      0.04880853403048679,
+      0.04112091437400366,
+      0.07001718073494383,
+      0.01298938670213775,
+      0.04075750837175677,
+      0.011785990171338035,
+      0.12188318414442578
+    ]
+  },
+  "gradient_boosting": {
+    "feature_names": [
+      "Pregnancies",
+      "Glucose",
+      "BloodPressure",
+      "SkinThickness",
+      "Insulin",
+      "BMI",
+      "DiabetesPedigreeFunction",
+      "Age",
+      "BMI_Category",
+      "Glucose_Category",
+      "Age_Group",
+      "Insulin_Glucose_Ratio"
+    ],
+    "importances": [
+      0.012883690761004592,
+      0.108205212733798,
+      0.0009683644318311698,
+      0.03515731483414996,
+      0.6879041189684669,
+      0.03469672138200907,
+      0.019456438826449634,
+      0.07121367058418439,
+      0.0,
+      7.65854878886829e-06,
+      8.91670005553543e-05,
+      0.029417641928762013
+    ]
+  }
+}
