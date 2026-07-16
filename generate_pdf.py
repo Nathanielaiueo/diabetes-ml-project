@@ -382,8 +382,8 @@ def build_cover():
         ('Semester', 'Genap 2025/2026'),
         ('Universitas', 'Universitas Dian Nuswantoro (UDINUS) Semarang'),
         ('Program Studi', 'Teknik Informatika (S1)'),
-        ('Koordinator MK', 'Ardytha Luthfiarta, M.Kom, MCS'),
-        ('Tanggal', 'Juli 2026'),
+        ('Dosen Pengampu', 'Ardytha Luthfiarta, M.Kom, MCS'),
+        ('Tanggal', '17 Juli 2026'),
     ]
     story.append(info_table(meta_rows, col_w=[4.8*cm, AVAIL_W - 4.8*cm]))
     story.append(sp(1.2))
@@ -601,11 +601,38 @@ def build_content():
 
     story.append(h2('2.2  Data Acquisition'))
     story.append(body(
-        'Dataset diunduh secara programatik dari repositori publik GitHub menggunakan '
-        '<font face="Courier" size="9">urllib.request.urlretrieve()</font>. '
-        'Verifikasi keaslian dilakukan dengan membandingkan statistik deskriptif dataset '
-        'yang diunduh (768 baris, 9 kolom) dengan dokumentasi resmi UCI Machine Learning '
-        'Repository. Data disimpan dalam format CSV dengan header yang informatif.'
+        'Dataset yang digunakan adalah <b>Pima Indians Diabetes Database</b> yang '
+        'tersedia secara publik dan dapat diunduh melalui tiga sumber resmi berikut:'
+    ))
+    src_data = [
+        [Paragraph('<b>Sumber</b>', ST['TableHeader']),
+         Paragraph('<b>Tautan (URL)</b>', ST['TableHeader'])],
+        [Paragraph('UCI Machine Learning Repository', ST['TableCellL']),
+         Paragraph('https://archive.ics.uci.edu/dataset/34/diabetes', ST['TableCellL'])],
+        [Paragraph('Kaggle Dataset', ST['TableCellL']),
+         Paragraph('https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database', ST['TableCellL'])],
+        [Paragraph('Jason Brownlee GitHub', ST['TableCellL']),
+         Paragraph('https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv', ST['TableCellL'])],
+    ]
+    src_tbl = Table(src_data, colWidths=[4.5*cm, AVAIL_W - 4.5*cm])
+    src_tbl.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), C_TABLE_H),
+        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [C_TABLE_R1, C_WHITE, C_TABLE_R1]),
+        ('GRID', (0, 0), (-1, -1), 0.4, HexColor('#CFD8DC')),
+        ('TOPPADDING', (0, 0), (-1, -1), 6),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+        ('LEFTPADDING', (0, 0), (-1, -1), 6),
+        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+    ]))
+    story += [src_tbl, sp(0.2)]
+    story.append(body(
+        'Dalam implementasi proyek ini, dataset diunduh langsung dari sumber ketiga '
+        '(Jason Brownlee GitHub) menggunakan skrip Python, lalu disimpan secara lokal '
+        'ke dalam folder <font face="Courier" size="9">data/diabetes.csv</font>. '
+        'Verifikasi keaslian data dilakukan dengan membandingkan statistik deskriptif '
+        'hasil unduhan (768 baris × 9 kolom) dengan dokumentasi resmi UCI Machine Learning '
+        'Repository. Seluruh 8 fitur input dan 1 variabel target (Outcome) berhasil '
+        'dimuat dengan tipe data yang sesuai (integer dan float).'
     ))
 
     story.append(h2('2.3  Exploratory Data Analysis (EDA)'))
@@ -1083,9 +1110,7 @@ def build_content():
     story.append(HRFlowable(width='100%', thickness=2, color=C_PRIMARY))
     story.append(sp(0.3))
     story.append(Paragraph(
-        '<b>Laporan ini disusun untuk memenuhi persyaratan Ujian Akhir Semester (UAS) '
-        'Mata Kuliah Pembelajaran Mesin, Semester Genap 2025/2026,<br/>'
-        'Universitas Dian Nuswantoro (UDINUS) Semarang.</b>',
+        '<b>Universitas Dian Nuswantoro (UDINUS) Semarang.</b>',
         ParagraphStyle('end', fontSize=9, alignment=TA_CENTER, textColor=C_GRAY,
                        fontName='Helvetica-Oblique', leading=14)
     ))

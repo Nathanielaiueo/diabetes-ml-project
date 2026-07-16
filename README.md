@@ -39,8 +39,19 @@ keturunan Pima Indian berusia ≥21 tahun.
 | Jumlah Sampel | 768 |
 | Jumlah Fitur | 8 (+ 4 fitur hasil feature engineering = 12 total) |
 | Target | Outcome (0 = Tidak Diabetes, 1 = Diabetes) |
-| Sumber | UCI ML Repository / Kaggle / NIDDK |
 | Tipe Task | Binary Classification |
+
+### 🔗 Sumber Dataset (Unduh Langsung)
+
+Dataset dapat diunduh secara gratis dari salah satu sumber resmi berikut:
+
+| Sumber | Tautan |
+|--------|--------|
+| **UCI Machine Learning Repository** *(Sumber Asli)* | https://archive.ics.uci.edu/dataset/34/diabetes |
+| **Kaggle** | https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database |
+| **Jason Brownlee GitHub** *(digunakan dalam proyek ini)* | https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv |
+
+> Dataset sudah tersimpan di folder `data/diabetes.csv` setelah menjalankan `python train.py`.
 
 ---
 
