@@ -154,11 +154,13 @@ Kami mengimplementasikan dan membandingkan **3 algoritma ML**:
 
 | Model | Accuracy | Precision | Recall | F1-Score | AUC-ROC |
 |-------|----------|-----------|--------|----------|---------|
-| Logistic Regression | — | — | — | — | — |
-| Random Forest | — | — | — | — | — |
-| **Gradient Boosting ⭐** | — | — | — | — | — |
+| Logistic Regression | 0.7586 | 0.6250 | 0.7500 | 0.6818 | 0.8283 |
+| Random Forest | 0.8793 | 0.7955 | 0.8750 | 0.8333 | 0.9482 |
+| **Gradient Boosting ⭐** | **0.8966** | **0.8333** | **0.8750** | **0.8537** | **0.9582** |
 
----
+> ⭐ **Gradient Boosting** dipilih sebagai model terbaik berdasarkan F1-Score tertinggi pada validation set (0.8571).  
+> Best Hyperparameters: `learning_rate=0.05, max_depth=3, n_estimators=100, subsample=1.0`  
+> 5-Fold CV F1: **0.8166** | GridSearchCV dengan 36 kombinasi parameter
 
 ## 🖥️ Fitur Aplikasi Streamlit
 
