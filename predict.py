@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+import sys
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
 """
 predict.py - CLI inference tool untuk prediksi diabetes
 UAS Pembelajaran Mesin - UDINUS - 2026
@@ -42,7 +45,7 @@ def build_input(preg, gluc, bp, skin, insulin, bmi, dpf, age, feat_names, scaler
     df = pd.DataFrame([d])
     if feat_names:
         df = df[feat_names]
-    return scaler.transform(df)
+    return scaler.transform(df.values)
 
 def main():
     parser = argparse.ArgumentParser(
@@ -102,23 +105,23 @@ def main():
     print(f"  Glucose     : {args.glucose} mg/dL")
     print(f"  BloodPressure: {args.bp} mmHg")
     print(f"  Insulin     : {args.insulin} mu U/ml")
-    print(f"  BMI         : {args.bmi} kg/m²")
+    print(f"  BMI         : {args.bmi} kg/m2")
     print(f"  Age         : {args.age} tahun")
     print("-" * 50)
     print(f"  Model       : {args.model.upper()}")
     if pred == 1:
         risk = "TINGGI" if dm_prob >= 0.7 else "SEDANG"
-        print(f"  ⚠️  PREDIKSI  : DIABETES TERDETEKSI")
+        print(f"  [WARNING] PREDIKSI  : DIABETES TERDETEKSI")
         print(f"  Tingkat Risiko : {risk}")
     else:
-        print(f"  ✅ PREDIKSI  : TIDAK DIABETES")
+        print(f"  [OK] PREDIKSI  : TIDAK DIABETES")
         print(f"  Tingkat Risiko : RENDAH")
     print(f"  Prob. Diabetes  : {dm_prob*100:.2f}%")
     print(f"  Prob. Non-DM    : {ndm_prob*100:.2f}%")
     print("=" * 50)
     print()
-    print("⚠️  DISCLAIMER: Prediksi ini bersifat indikatif dan TIDAK menggantikan")
-    print("   diagnosis medis. Selalu konsultasikan dengan dokter.")
+    print("[!] DISCLAIMER: Prediksi ini bersifat indikatif dan TIDAK menggantikan")
+    print("    diagnosis medis. Selalu konsultasikan dengan dokter.")
     print()
 
 if __name__ == "__main__":
