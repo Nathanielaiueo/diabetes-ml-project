@@ -51,142 +51,147 @@ st.set_page_config(
 # ─────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
+/* ── Fonts ── */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined');
 
-*, *::before, *::after { font-family: 'Inter', sans-serif !important; }
+/* ── Base font ── */
+html, body, [class*="css"] { font-family: 'Inter', sans-serif !important; }
 
-/* ── App background ── */
-.stApp { background: linear-gradient(140deg, #eef2f7 0%, #e3eaf5 100%); }
-
-/* ── Main content text — explicitly black ── */
-.main .block-container,
-.main .block-container p,
-.main .block-container h1,
-.main .block-container h2,
-.main .block-container h3,
-.main .block-container h4,
-.main .block-container h5,
-.main .block-container span,
-.main .block-container label,
-.main .block-container div {
-    color: #111111 !important;
+/* ── Fix Streamlit sidebar collapse button (keyboard_double... icon) ── */
+[data-testid="stSidebarCollapseButton"] button,
+[data-testid="stSidebarCollapsedControl"],
+button[data-testid="stSidebarCollapsedControl"] {
+    font-family: 'Material Icons' !important;
+    font-size: 20px !important;
+    overflow: hidden !important;
 }
 
-/* ── Sidebar — dark navy, all text white, scoped tightly ── */
+/* ── App background ── */
+.stApp { background: linear-gradient(140deg, #eef2f7 0%, #e3eaf5 100%) !important; }
+
+/* ══════════════════════════════════
+   SIDEBAR — dark navy background
+   Only color sidebar-specific elements
+   ══════════════════════════════════ */
 [data-testid="stSidebar"] {
     background: linear-gradient(180deg, #0f0c29 0%, #1a1246 45%, #0d2b6b 100%) !important;
 }
-[data-testid="stSidebar"] > div > div > div * {
+/* Sidebar: only set white on markdown content and radio, NOT globally */
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h1,
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h2,
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h3,
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] span,
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] strong,
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] em {
     color: white !important;
 }
-/* Sidebar radio labels */
-[data-testid="stSidebar"] .stRadio label { color: rgba(255,255,255,0.85) !important; }
-[data-testid="stSidebar"] .stRadio label span { color: rgba(255,255,255,0.85) !important; }
+[data-testid="stSidebar"] hr { border-color: rgba(255,255,255,0.2) !important; }
+[data-testid="stSidebar"] .stRadio label,
+[data-testid="stSidebar"] .stRadio label p,
+[data-testid="stSidebar"] .stRadio span { color: rgba(255,255,255,0.9) !important; }
+[data-testid="stSidebar"] .stWarning,
+[data-testid="stSidebar"] .stAlert { color: #111 !important; }
 
-/* ── Hero card ── */
+/* ══════════════════════════════════
+   MAIN CONTENT — all text dark/black
+   ══════════════════════════════════ */
+section.main * { color: #111111; }
+section.main p,
+section.main h1,
+section.main h2,
+section.main h3,
+section.main h4,
+section.main h5,
+section.main label,
+section.main span { color: #111111 !important; }
+
+/* Plotly & dataframe text override */
+.stDataFrame td, .stDataFrame th { color: #111111 !important; }
+
+/* Tabs */
+.stTabs [data-baseweb="tab"] button { color: #1a1a2e !important; }
+.stTabs [data-baseweb="tab"][aria-selected="true"] button { color: #2E86AB !important; }
+.stTabs [role="tab"] { color: #1a1a2e !important; }
+
+/* Slider / selectbox / widget labels */
+.stSlider > label, .stSelectbox > label,
+.stNumberInput > label, .stRadio > label,
+.stCheckbox > label { color: #1a1a2e !important; }
+
+/* ══════════════════════════════════
+   COMPONENT STYLES
+   ══════════════════════════════════ */
+
+/* Hero card — stays dark navy with white text */
 .hero-card {
     background: linear-gradient(135deg, #0f0c29 0%, #1a1246 50%, #0d2b6b 100%);
-    padding: 2.4rem 2rem;
-    border-radius: 18px;
-    color: white;
-    text-align: center;
-    margin-bottom: 2rem;
+    padding: 2.4rem 2rem; border-radius: 18px; color: white;
+    text-align: center; margin-bottom: 2rem;
     box-shadow: 0 12px 40px rgba(10,15,70,0.3);
 }
-.hero-card h1 {
-    font-size: 2.6rem;
-    font-weight: 800;
-    margin: 0;
-    color: white !important;
-    -webkit-text-fill-color: white !important;
-}
-.hero-card p { font-size: 1.05rem; opacity: 0.82; margin: 0.4rem 0 0; color: white !important; }
+.hero-card * { color: white !important; -webkit-text-fill-color: white !important; }
+.hero-card h1 { font-size: 2.6rem; font-weight: 800; margin: 0; }
+.hero-card p  { font-size: 1.05rem; opacity: 0.82; margin: 0.4rem 0 0; }
 
-/* ── Metric card ── */
+/* Metric card */
 .metric-card {
-    background: white;
-    padding: 1.4rem 1.2rem;
-    border-radius: 14px;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
-    border-left: 5px solid #2E86AB;
+    background: white; padding: 1.4rem 1.2rem; border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08); border-left: 5px solid #2E86AB;
     transition: transform .2s, box-shadow .2s;
 }
 .metric-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,0.14); }
-.metric-card h3 { font-size: 2rem; font-weight: 800; color: #2E86AB; margin: 0; }
-.metric-card p  { color: #6B7280; margin: .2rem 0 0; font-size: .85rem; }
+.metric-card h3 { font-size: 2rem; font-weight: 800; color: #2E86AB !important; margin: 0; }
+.metric-card p  { color: #6B7280 !important; margin: .2rem 0 0; font-size: .85rem; }
 
-/* ── Team card ── */
+/* Team card */
 .team-card {
-    background: white;
-    padding: 1.4rem 1rem;
-    border-radius: 14px;
-    text-align: center;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
-    transition: transform .2s;
+    background: white; padding: 1.4rem 1rem; border-radius: 14px;
+    text-align: center; box-shadow: 0 4px 18px rgba(0,0,0,0.08); transition: transform .2s;
 }
 .team-card:hover { transform: translateY(-4px); }
 
-/* ── Section header ── */
+/* Section header */
 .section-header {
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: #1a1a2e !important;
-    padding-bottom: .45rem;
-    border-bottom: 3px solid #2E86AB;
-    margin-bottom: 1.4rem;
+    font-size: 1.35rem; font-weight: 700; color: #1a1a2e !important;
+    padding-bottom: .45rem; border-bottom: 3px solid #2E86AB; margin-bottom: 1.4rem;
 }
 
-/* ── Prediction cards ── */
+/* Prediction result cards */
 .pred-positive {
     background: linear-gradient(135deg, #e53935 0%, #b71c1c 100%);
-    padding: 2.2rem;
-    border-radius: 18px;
-    color: white !important;
-    text-align: center;
+    padding: 2.2rem; border-radius: 18px; text-align: center;
     box-shadow: 0 10px 35px rgba(229,57,53,.35);
     animation: pulse .9s ease-in-out infinite alternate;
 }
+.pred-positive * { color: white !important; -webkit-text-fill-color: white !important; }
 .pred-negative {
     background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
-    padding: 2.2rem;
-    border-radius: 18px;
-    color: white !important;
-    text-align: center;
+    padding: 2.2rem; border-radius: 18px; text-align: center;
     box-shadow: 0 10px 35px rgba(46,125,50,.35);
 }
-@keyframes pulse { from { box-shadow: 0 10px 35px rgba(229,57,53,.35); }
-                   to   { box-shadow: 0 10px 55px rgba(229,57,53,.60); } }
+.pred-negative * { color: white !important; -webkit-text-fill-color: white !important; }
+@keyframes pulse {
+    from { box-shadow: 0 10px 35px rgba(229,57,53,.35); }
+    to   { box-shadow: 0 10px 55px rgba(229,57,53,.60); }
+}
 
-/* ── Insight box ── */
+/* Insight box */
 .insight-box {
-    background: white;
-    padding: 1.25rem;
-    border-radius: 12px;
-    border-left: 5px solid #F18F01;
-    box-shadow: 0 3px 12px rgba(0,0,0,.07);
+    background: white; padding: 1.25rem; border-radius: 12px;
+    border-left: 5px solid #F18F01; box-shadow: 0 3px 12px rgba(0,0,0,.07);
     margin-bottom: .9rem;
 }
 .insight-box h4 { color: #F18F01 !important; margin: 0 0 .4rem; font-size: .95rem; font-weight: 700; }
 .insight-box p  { color: #374151 !important; margin: 0; font-size: .88rem; line-height: 1.65; }
 
-/* ── Step indicator ── */
+/* Step circle */
 .step-circle {
     width: 38px; height: 38px; border-radius: 50%;
     display: inline-flex; align-items: center; justify-content: center;
-    font-weight: 800; font-size: 1rem; color: white;
-    flex-shrink: 0;
+    font-weight: 800; font-size: 1rem; color: white !important; flex-shrink: 0;
 }
-
-/* ── Tabs text color ── */
-.stTabs [data-baseweb="tab"] { color: #1a1a2e !important; }
-.stTabs [data-baseweb="tab"][aria-selected="true"] { color: #2E86AB !important; }
-
-/* ── Streamlit widgets text ── */
-.stSlider label, .stSelectbox label, .stNumberInput label,
-.stRadio label, .stCheckbox label { color: #1a1a2e !important; }
-
-/* ── Tables text ── */
-.stDataFrame td, .stDataFrame th { color: #111111 !important; }
 
 /* ── Hide Streamlit default chrome ── */
 #MainMenu { visibility: hidden; }
@@ -194,6 +199,7 @@ footer    { visibility: hidden; }
 header    { visibility: hidden; }
 </style>
 """, unsafe_allow_html=True)
+
 
 
 # ─────────────────────────────────────────────────────────────
