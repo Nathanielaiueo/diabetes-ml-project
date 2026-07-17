@@ -58,12 +58,11 @@ st.markdown("""
 /* ── Base font ── */
 html, body, [class*="css"] { font-family: 'Inter', sans-serif !important; }
 
-/* ── Fix Streamlit sidebar collapse button (keyboard_double... icon) ── */
-[data-testid="stSidebarCollapseButton"] button,
-[data-testid="stSidebarCollapsedControl"],
-button[data-testid="stSidebarCollapsedControl"] {
-    font-family: 'Material Icons' !important;
-    font-size: 20px !important;
+/* ── Ensure sidebar expand button is always visible when sidebar is closed ── */
+[data-testid="stSidebarCollapsedControl"] {
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: flex !important;
 }
 
 /* ── App background ── */
