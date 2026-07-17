@@ -58,12 +58,30 @@ st.markdown("""
 /* ── App background ── */
 .stApp { background: linear-gradient(140deg, #eef2f7 0%, #e3eaf5 100%); }
 
-/* ── Sidebar ── */
+/* ── Main content text — explicitly black ── */
+.main .block-container,
+.main .block-container p,
+.main .block-container h1,
+.main .block-container h2,
+.main .block-container h3,
+.main .block-container h4,
+.main .block-container h5,
+.main .block-container span,
+.main .block-container label,
+.main .block-container div {
+    color: #111111 !important;
+}
+
+/* ── Sidebar — dark navy, all text white, scoped tightly ── */
 [data-testid="stSidebar"] {
     background: linear-gradient(180deg, #0f0c29 0%, #1a1246 45%, #0d2b6b 100%) !important;
 }
-[data-testid="stSidebar"] * { color: white !important; }
-[data-testid="stSidebar"] .stRadio > label { color: rgba(255,255,255,0.7) !important; }
+[data-testid="stSidebar"] > div > div > div * {
+    color: white !important;
+}
+/* Sidebar radio labels */
+[data-testid="stSidebar"] .stRadio label { color: rgba(255,255,255,0.85) !important; }
+[data-testid="stSidebar"] .stRadio label span { color: rgba(255,255,255,0.85) !important; }
 
 /* ── Hero card ── */
 .hero-card {
@@ -79,12 +97,10 @@ st.markdown("""
     font-size: 2.6rem;
     font-weight: 800;
     margin: 0;
-    background: linear-gradient(135deg, #64b5f6 0%, #ce93d8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: white !important;
+    -webkit-text-fill-color: white !important;
 }
-.hero-card p { font-size: 1.05rem; opacity: 0.82; margin: 0.4rem 0 0; }
+.hero-card p { font-size: 1.05rem; opacity: 0.82; margin: 0.4rem 0 0; color: white !important; }
 
 /* ── Metric card ── */
 .metric-card {
@@ -114,7 +130,7 @@ st.markdown("""
 .section-header {
     font-size: 1.35rem;
     font-weight: 700;
-    color: #1a1a2e;
+    color: #1a1a2e !important;
     padding-bottom: .45rem;
     border-bottom: 3px solid #2E86AB;
     margin-bottom: 1.4rem;
@@ -125,7 +141,7 @@ st.markdown("""
     background: linear-gradient(135deg, #e53935 0%, #b71c1c 100%);
     padding: 2.2rem;
     border-radius: 18px;
-    color: white;
+    color: white !important;
     text-align: center;
     box-shadow: 0 10px 35px rgba(229,57,53,.35);
     animation: pulse .9s ease-in-out infinite alternate;
@@ -134,7 +150,7 @@ st.markdown("""
     background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
     padding: 2.2rem;
     border-radius: 18px;
-    color: white;
+    color: white !important;
     text-align: center;
     box-shadow: 0 10px 35px rgba(46,125,50,.35);
 }
@@ -150,8 +166,8 @@ st.markdown("""
     box-shadow: 0 3px 12px rgba(0,0,0,.07);
     margin-bottom: .9rem;
 }
-.insight-box h4 { color: #F18F01; margin: 0 0 .4rem; font-size: .95rem; font-weight: 700; }
-.insight-box p  { color: #374151; margin: 0; font-size: .88rem; line-height: 1.65; }
+.insight-box h4 { color: #F18F01 !important; margin: 0 0 .4rem; font-size: .95rem; font-weight: 700; }
+.insight-box p  { color: #374151 !important; margin: 0; font-size: .88rem; line-height: 1.65; }
 
 /* ── Step indicator ── */
 .step-circle {
@@ -161,6 +177,17 @@ st.markdown("""
     flex-shrink: 0;
 }
 
+/* ── Tabs text color ── */
+.stTabs [data-baseweb="tab"] { color: #1a1a2e !important; }
+.stTabs [data-baseweb="tab"][aria-selected="true"] { color: #2E86AB !important; }
+
+/* ── Streamlit widgets text ── */
+.stSlider label, .stSelectbox label, .stNumberInput label,
+.stRadio label, .stCheckbox label { color: #1a1a2e !important; }
+
+/* ── Tables text ── */
+.stDataFrame td, .stDataFrame th { color: #111111 !important; }
+
 /* ── Hide Streamlit default chrome ── */
 #MainMenu { visibility: hidden; }
 footer    { visibility: hidden; }
@@ -168,7 +195,9 @@ header    { visibility: hidden; }
 </style>
 """, unsafe_allow_html=True)
 
+
 # ─────────────────────────────────────────────────────────────
+
 # PATHS & CONSTANTS
 # ─────────────────────────────────────────────────────────────
 BASE_DIR    = Path(__file__).parent
@@ -1310,7 +1339,7 @@ def page_dokumentasi():
     </div>
     """, unsafe_allow_html=True)
 
-    t1, t2, t3, t4 = st.tabs(["📁 Dataset","⚙️ Metodologi","🚀 Cara Penggunaan","📚 Referensi"])
+    t1, t2, t3 = st.tabs(["📁 Dataset","⚙️ Metodologi","🚀 Cara Penggunaan"])
 
     with t1:
         st.markdown("""
@@ -1490,55 +1519,6 @@ diabetes-ml-project/
                         border-bottom:1px solid #e5e7eb;">
               <div style="min-width:210px;font-weight:700;color:#2E86AB;font-size:.9rem;">{pg}</div>
               <div style="font-size:.88rem;color:#374151;">{desc}</div>
-            </div>
-            """, unsafe_allow_html=True)
-
-    with t4:
-        st.markdown("### 📚 Referensi")
-        refs = [
-            (1,"Pima Indians Diabetes Database",
-             "Smith, J.W., Everhart, J.E., Dickson, W.C., et al. (1988).",
-             "UCI Machine Learning Repository",
-             "https://archive.ics.uci.edu/ml/datasets/diabetes"),
-            (2,"Scikit-learn: Machine Learning in Python",
-             "Pedregosa, F., Varoquaux, G., Gramfort, A., et al. (2011).",
-             "Journal of Machine Learning Research, 12, 2825–2830",
-             "https://scikit-learn.org"),
-            (3,"Streamlit – The fastest way to build data apps",
-             "Streamlit Inc. (2024).",
-             "streamlit.io",
-             "https://streamlit.io"),
-            (4,"IDF Diabetes Atlas, 10th Edition",
-             "International Diabetes Federation (2021).",
-             "IDF, Brussels, Belgium",
-             "https://diabetesatlas.org"),
-            (5,"Random Forests",
-             "Breiman, L. (2001).",
-             "Machine Learning, 45(1), 5–32",
-             "https://doi.org/10.1023/A:1010933404324"),
-            (6,"Greedy Function Approximation: A Gradient Boosting Machine",
-             "Friedman, J.H. (2001).",
-             "The Annals of Statistics, 29(5), 1189–1232",
-             "https://doi.org/10.1214/aos/1013203451"),
-            (7,"Feature Engineering for Machine Learning",
-             "Zheng, A. & Casari, A. (2018).",
-             "O'Reilly Media",
-             "https://www.oreilly.com/library/view/feature-engineering-for/9781491953235/"),
-            (8,"An Introduction to Statistical Learning",
-             "James, G., Witten, D., Hastie, T., Tibshirani, R. (2021).",
-             "Springer, New York. 2nd Edition",
-             "https://www.statlearning.com"),
-        ]
-        for no, title, authors, source, url in refs:
-            st.markdown(f"""
-            <div style="background:white;padding:1rem;border-radius:10px;
-                        box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:.65rem;
-                        border-left:3px solid #2E86AB;">
-              <p style="margin:0;font-weight:700;color:#1a1a2e;font-size:.88rem;">[{no}] {title}</p>
-              <p style="margin:.2rem 0 0;color:#6B7280;font-size:.83rem;">{authors} {source}.</p>
-              <a href="{url}" target="_blank" style="color:#2E86AB;font-size:.8rem;text-decoration:none;">
-                🔗 {url}
-              </a>
             </div>
             """, unsafe_allow_html=True)
 
