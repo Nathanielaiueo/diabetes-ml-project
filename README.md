@@ -184,7 +184,7 @@ Aplikasi web interaktif dengan **6 halaman**:
 | 🤖 **Prediksi Diabetes** | Form input data pasien → prediksi real-time + analisis risiko |
 | 📈 **Evaluasi Model** | Tabel perbandingan, confusion matrix, ROC curves, radar chart |
 | 💡 **Interpretasi & Bisnis** | Feature importance, justifikasi model, rekomendasi strategis |
-| 📚 **Dokumentasi** | Deskripsi dataset, metodologi, cara penggunaan, referensi |
+| 📚 **Dokumentasi** | Deskripsi dataset, metodologi, cara penggunaan |
 
 ---
 
@@ -202,15 +202,6 @@ Aplikasi web interaktif dengan **6 halaman**:
 | Joblib | 1.3+ | Serialisasi model |
 | nbformat | 5.9+ | Generate notebook |
 
----
-
-## 📚 Referensi
-
-1. Smith, J.W., et al. (1988). *Pima Indians Diabetes Database*. UCI Machine Learning Repository.
-2. Pedregosa, F., et al. (2011). *Scikit-learn: Machine Learning in Python*. JMLR, 12, 2825–2830.
-3. International Diabetes Federation. (2021). *IDF Diabetes Atlas, 10th Edition*. Brussels.
-4. Breiman, L. (2001). *Random Forests*. Machine Learning, 45(1), 5–32.
-5. Friedman, J.H. (2001). *Greedy Function Approximation: A Gradient Boosting Machine*. AoS, 29(5).
 
 ---
 
