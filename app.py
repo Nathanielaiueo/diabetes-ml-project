@@ -64,7 +64,6 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif !important; }
 button[data-testid="stSidebarCollapsedControl"] {
     font-family: 'Material Icons' !important;
     font-size: 20px !important;
-    overflow: hidden !important;
 }
 
 /* ── App background ── */
