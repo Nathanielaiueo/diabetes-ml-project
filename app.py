@@ -58,11 +58,56 @@ st.markdown("""
 /* ── Base font ── */
 html, body, [class*="css"] { font-family: 'Inter', sans-serif !important; }
 
-/* ── Ensure sidebar expand button is always visible when sidebar is closed ── */
+/* ════════════════════════════════════════════
+   SIDEBAR TOGGLE BUTTONS — selalu terlihat
+   ════════════════════════════════════════════ */
+
+/* Tombol < di dalam sidebar (collapse) — selalu tampil */
+[data-testid="stSidebarCollapseButton"] {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+[data-testid="stSidebarCollapseButton"] button {
+    opacity: 1 !important;
+    visibility: visible !important;
+    background: rgba(255,255,255,0.15) !important;
+    border-radius: 50% !important;
+    color: white !important;
+}
+
+/* Tombol > di luar sidebar (expand) — SELALU TAMPIL PROMINENT */
 [data-testid="stSidebarCollapsedControl"] {
     visibility: visible !important;
     opacity: 1 !important;
     display: flex !important;
+    position: fixed !important;
+    left: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 99999 !important;
+    background: linear-gradient(180deg, #1a1246, #0d2b6b) !important;
+    border-radius: 0 10px 10px 0 !important;
+    padding: 14px 8px !important;
+    box-shadow: 3px 0 12px rgba(0,0,0,0.4) !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+[data-testid="stSidebarCollapsedControl"] button {
+    background: transparent !important;
+    border: none !important;
+    color: white !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    cursor: pointer !important;
+    font-size: 18px !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+}
+[data-testid="stSidebarCollapsedControl"] svg,
+[data-testid="stSidebarCollapsedControl"] span {
+    color: white !important;
+    fill: white !important;
+    opacity: 1 !important;
 }
 
 /* ── App background ── */
