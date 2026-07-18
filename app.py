@@ -1314,10 +1314,19 @@ def page_interpretasi():
         return fig
 
     with t1:
-        show_chart(fi_bar(fi,'logistic_regression',None,
-            "Logistic Regression – Koefisien Fitur","Koefisien"),
-            use_container_width=True)
-        st.info("Merah = meningkatkan risiko diabetes · Biru = mengurangi risiko diabetes.")
+        lr_fig = fi_bar(fi,'logistic_regression',None,
+            "Logistic Regression – Koefisien Fitur","Koefisien")
+        show_chart(lr_fig, use_container_width=True)
+        lr_vals = fi.get('logistic_regression', {}).get('coefficients', [])
+        has_neg = any(v < 0 for v in lr_vals)
+        if has_neg:
+            st.info("🔴 **Merah** = koefisien positif (meningkatkan risiko diabetes) · "
+                    "🔵 **Biru** = koefisien negatif (mengurangi risiko diabetes).")
+        else:
+            st.info("ℹ️ Semua koefisien bernilai positif — seluruh fitur berkontribusi "
+                    "meningkatkan risiko diabetes dalam model Logistic Regression ini. "
+                    "Semakin besar nilai koefisien, semakin kuat pengaruhnya.")
+
     with t2:
         show_chart(fi_bar(fi,'random_forest',COLORS['secondary'],
             "Random Forest – Feature Importances","Importance Score"),
