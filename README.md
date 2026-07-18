@@ -66,7 +66,7 @@ Dataset dapat diunduh secara gratis dari salah satu sumber resmi berikut:
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/fahmi-nathaniela/diabetes-ml-project.git
+git clone https://github.com/Nathanielaiueo/diabetes-ml-project.git
 cd diabetes-ml-project
 
 # 2. (Opsional tapi disarankan) Buat virtual environment
@@ -77,11 +77,11 @@ venv\Scripts\activate       # Windows
 # 3. Install semua dependensi
 pip install -r requirements.txt
 
-# 4. Buat notebook EDA (generate .ipynb)
-python notebooks/create_notebook.py
-
-# 5. Jalankan pipeline training (download data + latih model + simpan)
+# 4. Jalankan pipeline training (download data + latih model + simpan)
 python train.py
+
+# 5. (Opsional) Jalankan prediksi via CLI
+python predict.py --glucose 148 --bmi 33.6 --age 50 --model best
 
 # 6. Jalankan aplikasi Streamlit
 streamlit run app.py
@@ -99,6 +99,7 @@ diabetes-ml-project/
 ├── 📄 README.md                        ← Dokumentasi utama (ini)
 ├── 📄 requirements.txt                 ← Dependensi Python
 ├── 📄 train.py                         ← Pipeline ML end-to-end (Soal 1-3)
+├── 📄 predict.py                       ← CLI inference tool prediksi diabetes
 ├── 📄 app.py                           ← Aplikasi Streamlit (Soal 4)
 ├── 📄 .gitignore
 │
@@ -107,22 +108,25 @@ diabetes-ml-project/
 │   └── diabetes_processed.csv         ← Dataset setelah preprocessing
 │
 ├── 📁 models/
-│   ├── best_model.pkl                  ← Model terbaik (siap digunakan)
+│   ├── best_model.pkl                  ← Model terbaik (= Gradient Boosting)
 │   ├── logistic_regression.pkl         ← Model Logistic Regression
 │   ├── random_forest.pkl               ← Model Random Forest
 │   ├── gradient_boosting.pkl           ← Model Gradient Boosting
 │   ├── scaler.pkl                      ← StandardScaler yang sudah di-fit
 │   ├── results.json                    ← Hasil evaluasi lengkap semua model
-│   ├── feature_info.json               ← Nama dan info fitur
-│   └── feature_importances.json       ← Feature importance per model
+│   ├── feature_info.json               ← Nama dan info fitur (12 fitur)
+│   └── feature_importances.json        ← Feature importance per model
 │
 ├── 📁 notebooks/
-│   ├── create_notebook.py              ← Script pembuat notebook
-│   └── 01_EDA_Preprocessing.ipynb     ← Notebook EDA lengkap (Soal 2)
+│   └── 01_EDA_Preprocessing.ipynb      ← Notebook EDA lengkap (Soal 2)
+│
+├── 📁 src/
+│   └── utils.py                        ← Fungsi utilitas (metrics, plots)
 │
 └── 📁 reports/
-    ├── Laporan_Teknis.md               ← Laporan teknis PDF (Soal 5)
-    └── figures/                        ← Grafik dan visualisasi (8 gambar)
+    ├── Laporan_Teknis.md               ← Laporan teknis format Markdown
+    ├── Laporan_Teknis_UAS.pdf          ← Laporan teknis format PDF (Soal 5)
+    └── figures/                        ← Grafik dan visualisasi
         ├── 01_class_distribution.png
         ├── 02_feature_distributions.png
         ├── 03_correlation_heatmap.png
@@ -130,7 +134,13 @@ diabetes-ml-project/
         ├── 05_confusion_matrices.png
         ├── 06_roc_curves.png
         ├── 07_feature_importance.png
-        └── 08_model_comparison.png
+        ├── 08_model_comparison.png
+        └── screenshots/                ← Screenshot antarmuka aplikasi
+            ├── 01_beranda.png
+            ├── 02_eda.png
+            ├── 03_prediksi.png
+            ├── 04_evaluasi.png
+            └── 05_interpretasi.png
 ```
 
 ---
@@ -160,8 +170,6 @@ Kami mengimplementasikan dan membandingkan **3 algoritma ML**:
 ---
 
 ## 📊 Hasil Evaluasi (Test Set)
-
-> *Nilai aktual akan terisi setelah menjalankan `python train.py`*
 
 | Model | Accuracy | Precision | Recall | F1-Score | AUC-ROC |
 |-------|----------|-----------|--------|----------|---------|
