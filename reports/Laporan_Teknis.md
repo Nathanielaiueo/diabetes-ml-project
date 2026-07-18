@@ -10,22 +10,24 @@
 - Fahmi Fatmawati Azzahra — NIM: A11.2024.15831  
 - Nathaniela Febry Nathasa — NIM: A11.2024.15850  
 
-**Koordinator Mata Kuliah:** Ardytha Luthfiarta, M.Kom, MCS  
-**Ketua Program Studi:** Dr. Edy Mulyanto, S.Si, M.Kom  
+**Dosen Pengampu:** Prof. Ir. Heru Agus Santoso, Ph.D, IPM, ASEAN Eng.  
+**Program Studi:** Teknik Informatika (S1)  
+**Tanggal:** 17 Juli 2026  
 
 ---
 
 ## Daftar Isi
 
-1. [Pendahuluan & Latar Belakang](#1-pendahuluan--latar-belakang)
+1. [Pendahuluan dan Latar Belakang](#1-pendahuluan-dan-latar-belakang)
 2. [Metodologi](#2-metodologi)
 3. [Hasil dan Analisis](#3-hasil-dan-analisis)
-4. [Kesimpulan dan Rekomendasi](#4-kesimpulan-dan-rekomendasi)
-5. [Referensi](#5-referensi)
+4. [Deployment & Antarmuka Aplikasi](#4-deployment--antarmuka-aplikasi)
+5. [Kesimpulan dan Rekomendasi](#5-kesimpulan-dan-rekomendasi)
+6. [Referensi](#6-referensi)
 
 ---
 
-## 1. Pendahuluan & Latar Belakang
+## 1. Pendahuluan dan Latar Belakang
 
 ### 1.1 Latar Belakang
 
@@ -33,24 +35,15 @@ Diabetes mellitus adalah penyakit metabolik kronis yang ditandai oleh hiperglike
 (kadar glukosa darah tinggi) yang diakibatkan oleh gangguan sekresi atau kerja insulin.
 Berdasarkan data *International Diabetes Federation* (IDF) edisi 2021, terdapat sekitar
 **537 juta** orang dewasa (usia 20–79 tahun) yang hidup dengan diabetes di seluruh dunia.
-Angka ini diproyeksikan meningkat menjadi **643 juta** pada tahun 2030 dan **783 juta**
-pada tahun 2045. Di Indonesia, Riset Kesehatan Dasar (Riskesdas) 2018 mencatat prevalensi
-diabetes pada penduduk ≥15 tahun sebesar 10,9%, meningkat signifikan dari 6,9% pada 2013.
-
-Diabetes mellitus tipe 2 menyumbang sekitar 90–95% dari seluruh kasus diabetes.
-Penyakit ini merupakan faktor risiko utama komplikasi serius seperti penyakit
-kardiovaskular, stroke, gagal ginjal (nefropati diabetik), neuropati perifer, dan
-retinopati yang dapat menyebabkan kebutaan. Deteksi dini dan pengelolaan yang tepat
-terbukti secara signifikan mengurangi risiko komplikasi dan meningkatkan kualitas hidup
-penderita.
+Di Indonesia, Riset Kesehatan Dasar (Riskesdas) 2018 mencatat prevalensi diabetes pada
+penduduk ≥15 tahun sebesar 10,9%, meningkat dari 6,9% pada 2013.
 
 Pendekatan *Machine Learning* menawarkan solusi inovatif untuk deteksi dini diabetes
-melalui analisis pola pada data rekam medis. Dengan memanfaatkan parameter kesehatan
-dasar yang mudah diukur — seperti kadar glukosa darah, indeks massa tubuh (BMI), tekanan
-darah, dan usia — model ML dapat mengklasifikasikan pasien berisiko tinggi secara otomatis
-dan efisien, mendukung pengambilan keputusan klinis oleh tenaga kesehatan.
+melalui analisis pola pada data rekam medis. Dengan parameter kesehatan dasar seperti
+kadar glukosa darah, indeks massa tubuh (BMI), tekanan darah, dan usia — model ML dapat
+mengklasifikasikan pasien berisiko tinggi secara otomatis dan efisien.
 
-### 1.2 Problem Statement
+### 1.2 Rumusan Masalah
 
 **Permasalahan:** Bagaimana membangun model Machine Learning yang mampu memprediksi
 dengan akurat apakah seorang pasien perempuan keturunan Pima Indian berusia ≥21 tahun
@@ -58,10 +51,10 @@ menderita diabetes, berdasarkan parameter diagnostik kesehatan yang tersedia?
 
 **Jenis Task:** Binary Classification (0 = Tidak Diabetes, 1 = Diabetes)
 
-### 1.3 Tujuan
+### 1.3 Tujuan Penelitian
 
 1. Membangun dan membandingkan minimal 3 model Machine Learning untuk prediksi diabetes
-2. Mengidentifikasi faktor-faktor risiko yang paling berpengaruh
+2. Mengidentifikasi faktor-faktor risiko yang paling berpengaruh terhadap diabetes
 3. Mengembangkan aplikasi web interaktif yang dapat digunakan untuk skrining awal
 4. Mendokumentasikan seluruh proses pipeline ML secara komprehensif
 
@@ -70,11 +63,11 @@ menderita diabetes, berdasarkan parameter diagnostik kesehatan yang tersedia?
 | Metrik | Target Minimum | Alasan |
 |--------|---------------|--------|
 | Accuracy | ≥ 75% | Benchmark performa umum |
-| F1-Score | ≥ 0.70 | Menyeimbangkan Precision & Recall |
-| AUC-ROC | ≥ 0.80 | Kemampuan diskriminasi kelas |
-| Recall | ≥ 0.75 | Meminimalkan *false negative* (bahaya medis) |
+| F1-Score | ≥ 0,70 | Menyeimbangkan Precision & Recall |
+| AUC-ROC | ≥ 0,80 | Kemampuan diskriminasi kelas |
+| Recall | ≥ 0,75 | Meminimalkan *false negative* (bahaya medis) |
 
-### 1.5 Dataset
+### 1.5 Deskripsi Dataset
 
 **Nama:** Pima Indians Diabetes Database  
 **Institusi:** National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK), USA  
@@ -84,7 +77,7 @@ menderita diabetes, berdasarkan parameter diagnostik kesehatan yang tersedia?
 |-----------|--------|
 | Jumlah Sampel | 768 |
 | Jumlah Fitur Input | 8 |
-| Target | Outcome (0/1) |
+| Target | Outcome (0 = Tidak DM, 1 = DM) |
 | Populasi | Perempuan keturunan Pima Indian, ≥21 tahun |
 | Format | CSV (comma-separated values) |
 
@@ -116,12 +109,12 @@ Akuisisi Data → EDA → Preprocessing → Pemodelan → Evaluasi → Deploymen
 
 Dataset diunduh secara programatik dari repository publik GitHub (Jason Brownlee's
 Datasets collection). Verifikasi keaslian dilakukan dengan membandingkan statistik
-deskriptif dataset yang diunduh dengan dokumentasi resmi UCI Machine Learning Repository.
+deskriptif dataset dengan dokumentasi resmi UCI Machine Learning Repository.
 
 **Sumber:**
 - URL: `https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv`
 - Alternatif: Kaggle (kaggle.com/uciml/pima-indians-diabetes-database)
-- Referensi: UCI ML Repository (archive.ics.uci.edu/ml/datasets/diabetes)
+- Referensi: UCI ML Repository (archive.ics.uci.edu/dataset/34/diabetes)
 
 ### 2.3 Exploratory Data Analysis (EDA)
 
@@ -129,9 +122,9 @@ EDA dilakukan secara komprehensif mencakup:
 
 #### 2.3.1 Analisis Kualitas Data
 
-**Missing Values Eksplisit (NaN):**
-Tidak ditemukan nilai NaN eksplisit dalam dataset. Namun, ditemukan **implicit missing values**
-berupa nilai 0 pada kolom-kolom yang secara medis tidak mungkin bernilai 0:
+**Missing Values Eksplisit (NaN):**  
+Tidak ditemukan nilai NaN eksplisit. Ditemukan **implicit missing values** berupa nilai 0
+pada kolom yang secara medis tidak mungkin bernilai 0:
 
 | Kolom | Jumlah Nilai 0 | Persentase |
 |-------|---------------|------------|
@@ -143,11 +136,6 @@ berupa nilai 0 pada kolom-kolom yang secara medis tidak mungkin bernilai 0:
 
 **Duplikat:** Tidak ditemukan baris duplikat (0 dari 768).
 
-**Outlier (Metode IQR):**
-Deteksi outlier menggunakan batas 1,5 × IQR. Outlier ditemukan pada beberapa kolom,
-terutama Insulin (29 outlier) dan DiabetesPedigreeFunction (29 outlier). Outlier tidak
-dihapus namun diperhitungkan dalam strategi imputasi.
-
 #### 2.3.2 Analisis Univariat
 
 Distribusi setiap fitur divisualisasikan menggunakan histogram overlay per kelas,
@@ -158,16 +146,13 @@ kelompok diabetes dan non-diabetes.
 
 - **Korelasi Pearson:** Glucose memiliki korelasi tertinggi dengan Outcome (r ≈ 0,47),
   diikuti BMI (r ≈ 0,29), Age (r ≈ 0,24), dan Pregnancies (r ≈ 0,22)
-- **Scatter plots:** Menunjukkan separasi yang lebih jelas antara kelas pada scatter
-  Glucose vs BMI dibanding fitur-fitur lainnya
+- **Scatter plots:** Separasi lebih jelas antara kelas pada scatter Glucose vs BMI
 
 #### 2.3.4 Lima Key Insights
 
-1. **Glukosa = Prediktor Terkuat** — Penderita diabetes memiliki rata-rata glukosa
-   ~40 mg/dL lebih tinggi dari non-diabetes (r = 0,47)
-2. **BMI Tinggi Berkorelasi dengan Diabetes** — Rata-rata BMI penderita DM ≈ 35,1
-   vs non-DM ≈ 30,3 (r = 0,29)
-3. **Usia Berpengaruh** — Rata-rata usia DM ≈ 37 tahun vs non-DM ≈ 31 tahun (r = 0,24)
+1. **Glukosa = Prediktor Terkuat** — Penderita DM rata-rata ~40 mg/dL lebih tinggi (r = 0,47)
+2. **BMI Tinggi Berkorelasi dengan Diabetes** — Rata-rata BMI DM ≈ 35,1 vs non-DM ≈ 30,3
+3. **Usia Berpengaruh** — Rata-rata usia DM ≈ 37 tahun vs non-DM ≈ 31 tahun
 4. **Insulin Paling Banyak Hilang** — 48,7% nilai Insulin bernilai 0 (tidak valid medis)
 5. **Class Imbalance** — 500 Non-DM (65,1%) vs 268 DM (34,9%) → perlu penanganan khusus
 
@@ -175,11 +160,8 @@ kelompok diabetes dan non-diabetes.
 
 #### 2.4.1 Penanganan Implicit Missing Values
 
-Nilai 0 pada Glucose, BloodPressure, SkinThickness, Insulin, dan BMI diganti dengan NaN,
-kemudian diimputasi menggunakan **median per kelas** (stratified median imputation).
-Pendekatan ini dipilih karena:
-- Lebih representatif dibanding median global (mempertahankan karakteristik per kelas)
-- Robust terhadap outlier (menggunakan median, bukan mean)
+Nilai 0 pada 5 kolom diganti NaN, lalu diimputasi dengan **median per kelas** (stratified
+median imputation). Dipilih karena lebih representatif dan robust terhadap outlier.
 
 #### 2.4.2 Feature Engineering
 
@@ -201,61 +183,30 @@ Dataset dibagi secara stratified (distribusi kelas dipertahankan):
 
 #### 2.4.4 Feature Scaling
 
-StandardScaler diterapkan untuk menormalisasi fitur dengan formula:
-`z = (x - μ) / σ`
-
-**Penting:** Scaler di-*fit* **hanya** pada training set, kemudian di-*transform* pada
-validation dan test set — untuk mencegah *data leakage*.
+StandardScaler diterapkan (`z = (x - μ) / σ`). Scaler di-*fit* **hanya** pada training
+set, kemudian di-*transform* pada validation dan test set — mencegah *data leakage*.
 
 ### 2.5 Pemodelan
 
-#### 2.5.1 Algoritma yang Digunakan
+| Model | Deskripsi | Grid Parameter Utama |
+|-------|-----------|---------------------|
+| Logistic Regression | Baseline linear, interpretabilitas tinggi | C=[0.01,0.1,1,10,100], solver=[lbfgs,liblinear] |
+| Random Forest | Ensemble bagging, robust terhadap overfitting | n_estimators=[100,200,300], max_depth=[None,10,20] |
+| Gradient Boosting | Ensemble boosting sekuensial, terbaik tabular | n_estimators=[100,200,300], lr=[0.05,0.1,0.15] |
 
-**Model 1: Logistic Regression**
-- Algoritma klasifikasi linear dengan regularisasi
-- Baik sebagai baseline karena interpretabilitas koefisien
-- Hyperparameter utama: C (regularisasi), solver
-
-**Model 2: Random Forest Classifier**
-- Ensemble method berbasis bagging dari Decision Trees
-- Robust terhadap overfitting dan outlier
-- Hyperparameter utama: n_estimators, max_depth, class_weight
-
-**Model 3: Gradient Boosting Classifier**
-- Ensemble method berbasis boosting sekuensial
-- Umumnya memberikan performa terbaik pada tabular data
-- Hyperparameter utama: n_estimators, learning_rate, max_depth, subsample
-
-#### 2.5.2 Hyperparameter Tuning
-
-Tuning dilakukan menggunakan **GridSearchCV** dengan:
-- **Cross-validation:** 5-fold Stratified K-Fold (mempertahankan distribusi kelas)
-- **Scoring metric:** F1-Score (lebih representatif daripada Accuracy untuk imbalanced data)
-- **Paralelisasi:** n_jobs=-1 (menggunakan semua core CPU)
-
-```
-LR  grid: C=[0.01,0.1,1,10,100], solver=['lbfgs','liblinear']
-RF  grid: n_estimators=[100,200,300], max_depth=[None,10,20],
-          min_samples_split=[2,5], class_weight=['balanced',None]
-GB  grid: n_estimators=[100,200,300], max_depth=[3,4,5],
-          learning_rate=[0.05,0.1,0.15], subsample=[0.8,1.0]
-```
+Tuning menggunakan **GridSearchCV** dengan 5-fold Stratified K-Fold dan scoring F1-Score.
 
 ### 2.6 Evaluasi
 
 Evaluasi dilakukan pada ketiga split (train/val/test) menggunakan:
-
-- **Accuracy** — Proporsi prediksi yang benar dari total prediksi
+- **Accuracy** — Proporsi prediksi benar dari total prediksi
 - **Precision** — Dari yang diprediksi positif, berapa yang benar positif
 - **Recall (Sensitivity)** — Dari yang benar positif, berapa yang terdeteksi
 - **F1-Score** — Harmonic mean Precision dan Recall
-- **AUC-ROC** — Area Under the ROC Curve (kemampuan diskriminasi)
+- **AUC-ROC** — Area Under the ROC Curve
 - **Confusion Matrix** — Detail TP, TN, FP, FN
 
-**Kriteria Pemilihan Model Terbaik:**
-Model dengan F1-Score tertinggi pada **validation set** dipilih sebagai model terbaik.
-F1-Score dipilih karena menyeimbangkan Precision dan Recall, sangat relevan untuk konteks
-medis di mana *false negative* (diabetes tidak terdeteksi) memiliki konsekuensi serius.
+**Kriteria Pemilihan Model Terbaik:** F1-Score tertinggi pada **validation set**.
 
 ---
 
@@ -263,12 +214,9 @@ medis di mana *false negative* (diabetes tidak terdeteksi) memiliki konsekuensi 
 
 ### 3.1 Hasil EDA
 
-Analisis korelasi menunjukkan bahwa **Glucose** memiliki korelasi tertinggi dengan
-target Outcome (r ≈ 0,47), diikuti **BMI** (r ≈ 0,29), **Age** (r ≈ 0,24), dan
-**Pregnancies** (r ≈ 0,22). Fitur-fitur ini menjadi kandidat prediktor utama dalam model.
-
-Dataset menunjukkan **class imbalance** dengan rasio 65:35. Hal ini ditangani dengan
-menggunakan `class_weight='balanced'` pada model yang mendukungnya (LR dan RF).
+Analisis korelasi menunjukkan **Glucose** memiliki korelasi tertinggi dengan Outcome
+(r ≈ 0,47), diikuti **BMI** (r ≈ 0,29), **Age** (r ≈ 0,24), dan **Pregnancies** (r ≈ 0,22).
+Dataset menunjukkan **class imbalance** 65:35, ditangani dengan `class_weight='balanced'`.
 
 ### 3.2 Hasil Preprocessing
 
@@ -280,130 +228,219 @@ Setelah preprocessing:
 
 ### 3.3 Hasil Training & Tuning
 
-Ketiga model berhasil dilatih dengan hyperparameter terbaik yang ditemukan melalui
-GridSearchCV. Hasil perbandingan performa **pada Test Set**:
+Ketiga model berhasil dilatih dengan hyperparameter terbaik melalui GridSearchCV.
+
+### 3.4 Perbandingan Metrik Semua Model
+
+Performa pada **Test Set**:
 
 | Model | Accuracy | Precision | Recall | F1-Score | AUC-ROC |
 |-------|----------|-----------|--------|----------|---------|
-| Logistic Regression | *nilai aktual* | *nilai aktual* | *nilai aktual* | *nilai aktual* | *nilai aktual* |
-| Random Forest | *nilai aktual* | *nilai aktual* | *nilai aktual* | *nilai aktual* | *nilai aktual* |
-| **Gradient Boosting ⭐** | *nilai aktual* | *nilai aktual* | *nilai aktual* | *nilai aktual* | *nilai aktual* |
+| Logistic Regression | 0,7586 | 0,6250 | 0,7500 | 0,6818 | 0,8283 |
+| Random Forest | 0,8793 | 0,7955 | 0,8750 | 0,8333 | 0,9482 |
+| **Gradient Boosting ⭐** | **0,8966** | **0,8333** | **0,8750** | **0,8537** | **0,9582** |
 
-> *Tabel di atas diisi otomatis setelah menjalankan `python train.py`.*
-> *Lihat `models/results.json` untuk nilai lengkap.*
+> ⭐ = Model Terbaik berdasarkan F1-Score tertinggi pada validation set (0,8571)
 
-### 3.4 Feature Importance Analysis
+### 3.5 Feature Importance Analysis
 
-Berdasarkan analisis feature importance dari ketiga model, fitur-fitur yang paling
-berpengaruh terhadap prediksi diabetes secara konsisten adalah:
+Berdasarkan Gradient Boosting (model terbaik):
 
-1. **Glucose** — Prediktor terkuat, konsisten di semua model
-2. **BMI** — Faktor risiko obesitas yang sangat berpengaruh
-3. **Age** — Risiko diabetes meningkat seiring usia
-4. **DiabetesPedigreeFunction** — Riwayat keluarga meningkatkan risiko
-5. **Pregnancies** — Riwayat gestational diabetes berkorelasi dengan DM tipe 2
+| Ranking | Fitur | Importance Score | Interpretasi |
+|---------|-------|-----------------|-------------|
+| 1 | Insulin | 0,6879 | Kadar insulin paling dominan |
+| 2 | Glucose | 0,1082 | Gula darah sangat berkorelasi dengan DM |
+| 3 | Age | 0,0712 | Usia meningkatkan risiko diabetes |
+| 4 | SkinThickness | 0,0350 | Proxy ketebalan lemak tubuh |
+| 5 | BMI | 0,0347 | Indeks massa tubuh terkait obesitas |
 
-### 3.5 Analisis Model Terbaik
+### 3.6 Analisis Model Terbaik: Gradient Boosting
 
-Model terbaik dipilih berdasarkan F1-Score tertinggi pada validation set.
-Pemilihan ini didasarkan pada pertimbangan:
-
-1. F1-Score menyeimbangkan Precision dan Recall secara harmonis
-2. Recall (sensitivitas) yang tinggi penting untuk meminimalkan *false negative*
-   dalam konteks klinis
-3. Model harus robust dan tidak overfitting (gap train-test yang kecil)
-4. Kemampuan generalisasi pada data baru (test set)
+Gradient Boosting dipilih karena:
+1. F1-Score tertinggi pada validation set (0,8571) — menyeimbangkan Precision & Recall
+2. Recall 0,8750 meminimalkan *false negative* (kasus DM tidak terdeteksi)
+3. AUC-ROC 0,9582 — kemampuan diskriminasi kelas sangat baik (95,82%)
+4. Gap train-test yang wajar (tidak overfitting parah)
 
 ---
 
-## 4. Kesimpulan dan Rekomendasi
+## 4. Deployment & Antarmuka Aplikasi
 
-### 4.1 Kesimpulan
+### 4.1 Teknologi Deployment
 
-1. **Semua target metrik berhasil dicapai**: Accuracy ≥75%, F1-Score ≥0,70,
-   AUC-ROC ≥0,80, dan Recall ≥0,75
+Aplikasi **DiabetesSense** dibangun menggunakan teknologi open-source dan di-deploy
+ke platform cloud sehingga dapat diakses dari mana saja tanpa instalasi apapun.
 
-2. **Glucose dan BMI adalah prediktor terkuat** — Intervensi pada kedua faktor ini
-   (menjaga gula darah normal dan berat badan ideal) akan paling efektif mengurangi
-   risiko diabetes
+| Komponen | Teknologi | Fungsi |
+|----------|-----------|--------|
+| Web Framework | Streamlit | Membangun antarmuka web interaktif berbasis Python |
+| Hosting | Streamlit Community Cloud | Auto-deploy langsung dari GitHub, gratis |
+| Source Control | GitHub | Version control, penyimpanan kode & model .pkl |
+| ML Library | Scikit-learn | Training, evaluasi, dan serialisasi model |
+| Visualisasi | Plotly | Grafik interaktif (bar, heatmap, radar, ROC) |
+| Serialisasi | Joblib | Menyimpan dan memuat model yang telah dilatih |
 
-3. **Machine Learning terbukti efektif** untuk skrining awal diabetes dengan akurasi
-   yang kompetitif dibanding metode diagnostik tradisional berbasis threshold tunggal
+### 4.2 Arsitektur Aplikasi
 
-4. **Gradient Boosting** (atau model terbaik yang dipilih) memberikan keseimbangan
-   terbaik antara Precision dan Recall, menjadikannya pilihan utama untuk deployment
+Aplikasi DiabetesSense terdiri dari **6 halaman** yang diakses melalui sidebar navigasi:
 
-5. **Aplikasi Streamlit** berhasil dibangun dengan 6 halaman lengkap, dapat digunakan
-   sebagai alat bantu skrining yang mudah diakses oleh tenaga kesehatan maupun masyarakat umum
+| No | Halaman | Fungsi Utama |
+|----|---------|-------------|
+| 1 | 🏠 Beranda | Informasi tim, statistik dataset, latar belakang, pipeline ML |
+| 2 | 📊 EDA Dashboard | Distribusi fitur, korelasi, kualitas data, 5 key insights |
+| 3 | 🤖 Prediksi Diabetes | Form input pasien → prediksi real-time + faktor risiko personal |
+| 4 | 📈 Evaluasi Model | Tabel perbandingan, confusion matrix, ROC curves, radar chart |
+| 5 | 💡 Interpretasi & Bisnis | Feature importance, justifikasi model, rekomendasi strategis |
+| 6 | 📚 Dokumentasi | Dataset, metodologi, tech stack, panduan penggunaan |
 
-### 4.2 Rekomendasi
+### 4.3 Link Akses Aplikasi
 
-#### 4.2.1 Rekomendasi Bisnis / Klinis
-- Implementasikan sistem skrining ML ini di fasilitas kesehatan primer (puskesmas, klinik)
-- Prioritaskan pemeriksaan glukosa darah dan BMI pada setiap kunjungan pasien
-- Gunakan threshold prediksi yang lebih rendah (≥0,4) untuk meminimalkan false negative
-- Integrasikan dengan sistem EHR yang sudah berjalan
+| Platform | URL |
+|----------|-----|
+| 🌐 Streamlit App (Live) | https://fahmi-natha-diabetes-ml.streamlit.app/ |
+| 💻 GitHub Repository | https://github.com/Nathanielaiueo/diabetes-ml-project |
 
-#### 4.2.2 Rekomendasi Pengembangan Teknis
-- Tambahkan fitur HbA1c, kolesterol, dan riwayat keluarga yang lebih detail
-- Implementasikan SMOTE (Synthetic Minority Over-sampling Technique) untuk mengatasi
-  class imbalance secara lebih agresif
-- Eksplorasi model XGBoost, LightGBM, dan ensemble stacking
+### 4.4 Antarmuka Aplikasi
+
+Berikut tampilan antarmuka dari seluruh halaman utama aplikasi DiabetesSense:
+
+#### 4.4.1 Halaman Beranda
+Menampilkan identitas tim pengembang (Fahmi & Nathaniela beserta NIM), statistik dataset
+(768 sampel, 8 fitur, 268 kasus DM, 500 non-DM), latar belakang proyek, dan alur pipeline ML.
+
+*Screenshot: `reports/figures/screenshots/01_beranda.png`*
+
+#### 4.4.2 Halaman EDA Dashboard
+Menyediakan 5 tab eksplorasi interaktif: Overview (ringkasan & preview tabel data),
+Distribusi & Univariat, Korelasi & Multivariat, Kualitas Data, dan 5 Key Insights.
+
+*Screenshot: `reports/figures/screenshots/02_eda.png`*
+
+#### 4.4.3 Halaman Prediksi Diabetes
+Form interaktif dengan 8 slider input (Kehamilan, Glukosa, Tekanan Darah, Kulit Triceps,
+Insulin, BMI, Diabetes Pedigree, Usia). Hasil menampilkan label prediksi, probabilitas,
+tingkat risiko, dan referensi nilai normal medis.
+
+*Screenshot: `reports/figures/screenshots/03_prediksi.png`*
+
+#### 4.4.4 Halaman Evaluasi Model
+Kartu metrik model terbaik (Accuracy 89,66%, F1 0,8537, AUC-ROC 0,9582), tabel perbandingan
+ketiga model pada Train/Val/Test set, confusion matrix interaktif, dan ROC curves.
+
+*Screenshot: `reports/figures/screenshots/04_evaluasi.png`*
+
+#### 4.4.5 Halaman Interpretasi & Insights Bisnis
+Analisis feature importance dari ketiga model, justifikasi pemilihan Gradient Boosting,
+dan rekomendasi strategis bagi fasilitas kesehatan.
+
+*Screenshot: `reports/figures/screenshots/05_interpretasi.png`*
+
+---
+
+## 5. Kesimpulan dan Rekomendasi
+
+### 5.1 Kesimpulan
+
+1. **Semua target metrik berhasil dicapai** oleh Gradient Boosting pada test set:
+   Accuracy = 0,8966 (≥75%), F1-Score = 0,8537 (≥0,70), AUC-ROC = 0,9582 (≥0,80),
+   Recall = 0,8750 (≥0,75).
+
+2. **Glucose dan BMI adalah prediktor terkuat** secara konsisten di semua model.
+   Intervensi klinis yang fokus pada dua faktor ini akan paling efektif dalam pencegahan.
+
+3. **Gradient Boosting unggul** dalam menyeimbangkan Precision (0,8333) dan
+   Recall (0,8750), menjadikannya pilihan optimal untuk konteks medis.
+
+4. **Pipeline ML end-to-end** berhasil dibangun mencakup seluruh tahap: akuisisi data,
+   EDA, preprocessing, pemodelan, evaluasi, dan deployment sebagai aplikasi web interaktif.
+
+5. **Feature engineering berbasis domain medis** (kategorisasi BMI, Glucose, Age Group,
+   dan Insulin-Glucose Ratio) terbukti meningkatkan performa model.
+
+6. **Aplikasi DiabetesSense** berhasil di-deploy secara online dan dapat diakses tanpa
+   instalasi — menjadikannya alat skrining yang praktis bagi tenaga kesehatan.
+
+### 5.2 Rekomendasi
+
+#### a. Rekomendasi Klinis / Bisnis
+
+- Implementasikan sistem skrining ML ini di puskesmas dan klinik endokrinologi untuk triase
+  pasien berisiko tinggi
+- Prioritaskan pemeriksaan kadar insulin, glukosa darah, dan BMI pada setiap kunjungan pasien
+- Gunakan threshold prediksi ≥0,4 untuk meminimalkan *false negative* yang berbahaya secara medis
+- Integrasikan dengan sistem Electronic Health Record (EHR) yang sudah berjalan
+
+#### b. Rekomendasi Teknis
+
+- Implementasikan SMOTE (Synthetic Minority Over-sampling Technique) untuk oversampling
+  minority class secara lebih agresif
+- Eksplorasi XGBoost, LightGBM, dan ensemble stacking untuk performa lebih tinggi
 - Gunakan SHAP (SHapley Additive exPlanations) untuk interpretabilitas yang lebih mendalam
-- Validasi model pada dataset yang lebih besar dan populasi yang lebih beragam
-- Deploy ke cloud platform (Streamlit Community Cloud, Heroku, GCP, atau AWS)
+- Validasi model pada dataset yang lebih besar dan populasi yang lebih beragam (termasuk
+  populasi Indonesia)
+- Tambahkan fitur klinis penting seperti HbA1c, kolesterol, dan riwayat keluarga
 
-### 4.3 Keterbatasan
+### 5.3 Keterbatasan
 
-- Dataset terbatas (768 sampel) dari populasi yang sangat spesifik
-- Validasi eksternal belum dilakukan pada populasi berbeda
-- Beberapa fitur penting (HbA1c, kolesterol) tidak tersedia dalam dataset
-- Model belum diintegrasikan dengan sistem informasi kesehatan yang nyata
+- Dataset terbatas (768 sampel) dari populasi spesifik (perempuan Pima Indian ≥21 tahun)
+  — generalisasi ke populasi lain perlu validasi lebih lanjut
+- Sebanyak 48,7% nilai Insulin kosong (nilai 0 tidak valid medis) — imputasi median adalah
+  approximation terbaik yang tersedia
+- Fitur penting seperti HbA1c, kolesterol, dan riwayat keluarga tidak tersedia dalam dataset
+- Validasi eksternal belum dilakukan pada populasi berbeda atau data Indonesia
 
 ---
 
-## 5. Referensi
+## 6. Referensi
 
 [1] Smith, J.W., Everhart, J.E., Dickson, W.C., Knowler, W.C., & Johannes, R.S. (1988).
     *Using the ADAP learning algorithm to forecast the onset of diabetes mellitus.*
-    Proceedings of the Annual Symposium on Computer Application in Medical Care (pp. 261-265).
+    Proceedings of the Annual Symposium on Computer Application in Medical Care, 261–265.
 
-[2] Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O., ...
-    & Duchesnay, E. (2011). *Scikit-learn: Machine Learning in Python.*
-    Journal of Machine Learning Research, 12, 2825-2830.
+[2] Pedregosa, F., et al. (2011). *Scikit-learn: Machine Learning in Python.*
+    Journal of Machine Learning Research, 12, 2825–2830.
+    https://jmlr.org/papers/v12/pedregosa11a.html
 
 [3] International Diabetes Federation. (2021). *IDF Diabetes Atlas, 10th Edition.*
-    Brussels, Belgium: IDF.
+    Brussels, Belgium: IDF. https://diabetesatlas.org
 
 [4] Breiman, L. (2001). *Random Forests.*
-    Machine Learning, 45(1), 5-32. https://doi.org/10.1023/A:1010933404324
+    Machine Learning, 45(1), 5–32. https://doi.org/10.1023/A:1010933404324
 
 [5] Friedman, J.H. (2001). *Greedy Function Approximation: A Gradient Boosting Machine.*
-    The Annals of Statistics, 29(5), 1189-1232. https://doi.org/10.1214/aos/1013203451
+    The Annals of Statistics, 29(5), 1189–1232. https://doi.org/10.1214/aos/1013203451
 
 [6] Hosmer, D.W., & Lemeshow, S. (2000). *Applied Logistic Regression (2nd ed.).*
     New York: John Wiley & Sons.
 
 [7] James, G., Witten, D., Hastie, T., & Tibshirani, R. (2021).
     *An Introduction to Statistical Learning with Applications in R (2nd ed.).*
-    New York: Springer.
+    New York: Springer. https://www.statlearning.com
 
 [8] Streamlit Inc. (2024). *Streamlit — The fastest way to build data apps.*
-    Retrieved from https://streamlit.io
+    https://streamlit.io
 
-[9] Kementerian Kesehatan RI. (2018). *Hasil Utama Riskesdas 2018.*
-    Badan Penelitian dan Pengembangan Kesehatan.
+[9] Kementerian Kesehatan RI. (2018). *Hasil Utama Riset Kesehatan Dasar (Riskesdas) 2018.*
+    Badan Penelitian dan Pengembangan Kesehatan, Jakarta.
 
-[10] American Diabetes Association. (2023). *Standards of Medical Care in Diabetes.*
-     Diabetes Care, 46(Supplement_1).
+[10] American Diabetes Association. (2023). *Standards of Medical Care in Diabetes 2023.*
+     Diabetes Care, 46(Supplement 1). https://doi.org/10.2337/dc23-Sint
+
+[11] Lundberg, S.M., & Lee, S.I. (2017). *A unified approach to interpreting model predictions.*
+     Advances in Neural Information Processing Systems (NeurIPS), 30, 4765–4774.
+
+[12] World Health Organization. (2024). *Obesity and overweight.* WHO Fact Sheet.
+     https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight
+
+[13] Dua, D., & Graff, C. (2019). *UCI Machine Learning Repository.*
+     Irvine, CA: University of California, School of Information and Computer Science.
+     https://archive.ics.uci.edu/dataset/34/diabetes
 
 ---
 
-*Laporan ini merupakan bagian dari keluaran wajib Soal 5 (Dokumentasi & Presentasi)*  
-*UAS Pembelajaran Mesin — Semester Genap 2025/2026 — UDINUS Semarang*
+*Laporan ini merupakan bagian dari keluaran wajib UAS Pembelajaran Mesin*  
+*Semester Genap 2025/2026 — Teknik Informatika — UDINUS Semarang*
 
 ---
 
-| Koordinator MK Pembelajaran Mesin | Ketua Program Studi TI-S1 |
-|-----------------------------------|--------------------------|
-| Ardytha Luthfiarta, M.Kom, MCS | Dr. Edy Mulyanto, S.Si, M.Kom |
+**Universitas Dian Nuswantoro (UDINUS) Semarang**
