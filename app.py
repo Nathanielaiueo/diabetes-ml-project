@@ -1565,7 +1565,7 @@ cd diabetes-ml-project
 
 <span style="color:#6B7280;"># 2. Buat virtual environment (opsional, sangat disarankan)</span>
 python -m venv venv
-venv\Scripts\activate        <span style="color:#6B7280;"># Windows</span>
+venv\\Scripts\\activate        <span style="color:#6B7280;"># Windows</span>
 <span style="color:#6B7280;"># source venv/bin/activate  # Linux/Mac</span>
 
 <span style="color:#6B7280;"># 3. Install semua dependensi</span>
