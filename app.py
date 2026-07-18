@@ -312,17 +312,20 @@ MODEL_COLORS = {
 def show_chart(fig, **kwargs):
     """Render Plotly chart dengan semua teks hitam di background putih."""
     BLACK = "#111111"
-    fig.update_layout(
+    layout_updates = dict(
         paper_bgcolor="white",
         plot_bgcolor="white",
         font=dict(color=BLACK, family="Inter, sans-serif", size=12),
-        title_font=dict(color=BLACK, family="Inter, sans-serif", size=14),
         legend=dict(
             font=dict(color=BLACK),
             bgcolor="rgba(255,255,255,0.9)",
             bordercolor="#cccccc",
         ),
     )
+    # Hanya set title_font kalau chart punya judul (hindari 'undefined')
+    if fig.layout.title and fig.layout.title.text:
+        layout_updates['title_font'] = dict(color=BLACK, family="Inter, sans-serif", size=14)
+    fig.update_layout(**layout_updates)
     # Paksa semua sumbu (termasuk subplot) hitam
     fig.update_xaxes(
         tickfont=dict(color=BLACK, size=11),
@@ -1169,9 +1172,10 @@ def page_evaluasi():
             name=mn, x=metrics_l, y=vals, marker_color=clr, opacity=0.85,
             text=[f"{v:.3f}" for v in vals], textposition="outside",
         ))
-    fig.update_layout(barmode="group", yaxis_range=[0, 1.12],
+    fig.update_layout(barmode="group", yaxis_range=[0, 1.15],
                       height=450, plot_bgcolor="white", paper_bgcolor="white",
-                      legend=dict(x=0.75, y=0.98))
+                      legend=dict(orientation="h", yanchor="bottom", y=1.02,
+                                  xanchor="right", x=1))
     show_chart(fig, use_container_width=True)
 
     # ── Radar chart ──
@@ -1186,9 +1190,13 @@ def page_evaluasi():
             line_color=clr, fillcolor=clr, opacity=0.28,
         ))
     fig.update_layout(
-        polar=dict(radialaxis=dict(visible=True, range=[0,1])),
-        height=450, plot_bgcolor="white", paper_bgcolor="white",
-        legend=dict(x=0.82, y=1.0),
+        polar=dict(radialaxis=dict(visible=True, range=[0,1],
+                                   tickfont=dict(color="#111111"),
+                                   gridcolor="#dddddd"),
+                   angularaxis=dict(tickfont=dict(color="#111111"))),
+        height=480, paper_bgcolor="white",
+        legend=dict(orientation="h", yanchor="top", y=-0.05,
+                    xanchor="center", x=0.5),
     )
     show_chart(fig, use_container_width=True)
 
