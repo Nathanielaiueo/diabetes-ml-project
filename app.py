@@ -40,34 +40,37 @@ warnings.filterwarnings('ignore')
 # ─────────────────────────────────────────────────────────────
 # GLOBAL PLOTLY TEMPLATE — teks gelap untuk background putih
 # ─────────────────────────────────────────────────────────────
-_FONT_DARK = dict(family="Inter, sans-serif", color="#1a1a2e", size=12)
+_FONT_DARK = dict(family="Inter, sans-serif", color="#111111", size=12)
 pio.templates["light_app"] = go.layout.Template(
     layout=go.Layout(
         paper_bgcolor="white",
         plot_bgcolor="white",
         font=_FONT_DARK,
-        title=dict(font=dict(color="#1a1a2e", size=14, family="Inter, sans-serif")),
+        title=dict(font=dict(color="#111111", size=14, family="Inter, sans-serif")),
         xaxis=dict(
-            color="#374151", gridcolor="#e5e7eb", linecolor="#d1d5db",
-            tickfont=dict(color="#374151"),
-            title=dict(font=dict(color="#374151")),
+            color="#111111", gridcolor="#e5e7eb", linecolor="#bbbbbb",
+            tickfont=dict(color="#111111"),
+            title=dict(font=dict(color="#111111")),
         ),
         yaxis=dict(
-            color="#374151", gridcolor="#e5e7eb", linecolor="#d1d5db",
-            tickfont=dict(color="#374151"),
-            title=dict(font=dict(color="#374151")),
+            color="#111111", gridcolor="#e5e7eb", linecolor="#bbbbbb",
+            tickfont=dict(color="#111111"),
+            title=dict(font=dict(color="#111111")),
         ),
         legend=dict(
-            font=dict(color="#374151"),
-            bgcolor="rgba(255,255,255,0.8)",
-            bordercolor="#e5e7eb",
+            font=dict(color="#111111"),
+            bgcolor="rgba(255,255,255,0.9)",
+            bordercolor="#dddddd",
         ),
-        coloraxis=dict(colorbar=dict(tickfont=dict(color="#374151"),
-                                     title=dict(font=dict(color="#374151")))),
-        annotationdefaults=dict(font=dict(color="#374151")),
+        coloraxis=dict(colorbar=dict(
+            tickfont=dict(color="#111111"),
+            title=dict(font=dict(color="#111111")),
+        )),
+        annotationdefaults=dict(font=dict(color="#111111")),
     )
 )
 pio.templates.default = "light_app"
+
 
 
 
