@@ -27,7 +27,7 @@ Deskripsi:
 Dataset:
   Pima Indians Diabetes Database - National Institute of Diabetes and
   Digestive and Kidney Diseases (NIDDK)
-  Sumber: https://raw.githubusercontent.com/jbrownlee/Datasets/master/
+  Sumber: https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv
 
 Cara Menjalankan:
   python train.py
@@ -76,8 +76,7 @@ FIGURES_DIR = REPORT_DIR / 'figures'
 for d in [DATA_DIR, MODEL_DIR, REPORT_DIR, FIGURES_DIR]:
     d.mkdir(parents=True, exist_ok=True)
 
-DATASET_URL  = ("https://raw.githubusercontent.com/jbrownlee/"
-                "Datasets/master/pima-indians-diabetes.data.csv")
+DATASET_URL  = ("https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv")
 DATASET_PATH = DATA_DIR / 'diabetes.csv'
 
 COLUMNS = [
