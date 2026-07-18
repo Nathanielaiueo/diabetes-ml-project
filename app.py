@@ -292,6 +292,52 @@ MODEL_COLORS = {
 }
 
 # ─────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────
+# CHART HELPER — paksa semua teks chart hitam #111111
+# ─────────────────────────────────────────────────────────────
+def show_chart(fig, **kwargs):
+    """Render Plotly chart dengan semua teks hitam di background putih."""
+    BLACK = "#111111"
+    fig.update_layout(
+        paper_bgcolor="white",
+        plot_bgcolor="white",
+        font=dict(color=BLACK, family="Inter, sans-serif", size=12),
+        title_font=dict(color=BLACK, family="Inter, sans-serif", size=14),
+        legend=dict(
+            font=dict(color=BLACK),
+            bgcolor="rgba(255,255,255,0.9)",
+            bordercolor="#cccccc",
+        ),
+    )
+    # Paksa semua sumbu (termasuk subplot) hitam
+    fig.update_xaxes(
+        tickfont=dict(color=BLACK, size=11),
+        title_font=dict(color=BLACK, size=12),
+        color=BLACK,
+        linecolor="#aaaaaa",
+        gridcolor="#eeeeee",
+    )
+    fig.update_yaxes(
+        tickfont=dict(color=BLACK, size=11),
+        title_font=dict(color=BLACK, size=12),
+        color=BLACK,
+        linecolor="#aaaaaa",
+        gridcolor="#eeeeee",
+    )
+    # Paksa colorbar hitam (heatmap / scatter color)
+    for trace in fig.data:
+        if hasattr(trace, 'colorbar') and trace.colorbar is not None:
+            trace.update(colorbar=dict(
+                tickfont=dict(color=BLACK),
+                title=dict(font=dict(color=BLACK)),
+            ))
+    # Subplot titles (annotation)
+    for ann in fig.layout.annotations:
+        ann.font.color = BLACK
+    st.plotly_chart(fig, **kwargs)
+
+
+# ─────────────────────────────────────────────────────────────
 # DATA & MODEL LOADERS (cached)
 # ─────────────────────────────────────────────────────────────
 @st.cache_data(show_spinner=False)
@@ -643,7 +689,7 @@ def page_eda():
             fig.update_layout(title="Bar Chart Distribusi Kelas",
                               yaxis_title="Jumlah Sampel", height=340,
                               plot_bgcolor="white", paper_bgcolor="white", showlegend=False)
-            st.plotly_chart(fig, use_container_width=True)
+            show_chart(fig, use_container_width=True)
         with c2:
             fig = go.Figure([go.Pie(
                 labels=["Non-Diabetes","Diabetes"],
@@ -653,7 +699,7 @@ def page_eda():
             )])
             fig.update_layout(title="Pie Chart Proporsi Kelas", height=340,
                               plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, use_container_width=True)
+            show_chart(fig, use_container_width=True)
 
         st.markdown("---")
         st.markdown("### Distribusi Fitur")
@@ -676,7 +722,7 @@ def page_eda():
                 height=350, plot_bgcolor="white", paper_bgcolor="white",
                 legend=dict(x=0.68, y=0.97),
             )
-            st.plotly_chart(fig, use_container_width=True)
+            show_chart(fig, use_container_width=True)
         with c2:
             fig = go.Figure()
             for ov, lbl, clr in [(0,"Non-Diabetes",COLORS['primary']),
@@ -689,7 +735,7 @@ def page_eda():
                 title=f"Box Plot {sel_feat}", yaxis_title=sel_feat,
                 height=350, plot_bgcolor="white", paper_bgcolor="white",
             )
-            st.plotly_chart(fig, use_container_width=True)
+            show_chart(fig, use_container_width=True)
 
         # All features subplots
         st.markdown("#### Semua Fitur (Grid)")
@@ -708,7 +754,7 @@ def page_eda():
         fig.update_layout(barmode="overlay", height=230*nrows_g,
                           title_text="Semua Fitur berdasarkan Kelas Target",
                           plot_bgcolor="white", paper_bgcolor="white")
-        st.plotly_chart(fig, use_container_width=True)
+        show_chart(fig, use_container_width=True)
 
     # ── Tab 3: Korelasi ──────────────────────────────────────
     with tab3:
@@ -723,7 +769,7 @@ def page_eda():
         ))
         fig.update_layout(title="Correlation Matrix – Pima Indians Dataset",
                           height=520, plot_bgcolor="white", paper_bgcolor="white")
-        st.plotly_chart(fig, use_container_width=True)
+        show_chart(fig, use_container_width=True)
 
         st.markdown("#### Korelasi dengan Target (Outcome)")
         tc = df.corr()['Outcome'].drop('Outcome').sort_values(ascending=False)
@@ -735,7 +781,7 @@ def page_eda():
         fig.update_layout(title="Korelasi Fitur vs Outcome",
                           xaxis_title="Fitur", yaxis_title="Pearson r",
                           height=360, plot_bgcolor="white", paper_bgcolor="white")
-        st.plotly_chart(fig, use_container_width=True)
+        show_chart(fig, use_container_width=True)
 
         st.markdown("#### Scatter Plot Multivariat")
         c1, c2 = st.columns(2)
@@ -747,7 +793,7 @@ def page_eda():
                          color_discrete_map={0:COLORS['primary'], 1:COLORS['danger']},
                          opacity=0.65, title=f"Scatter: {xf} vs {yf}")
         fig.update_layout(height=420, plot_bgcolor="white", paper_bgcolor="white")
-        st.plotly_chart(fig, use_container_width=True)
+        show_chart(fig, use_container_width=True)
 
     # ── Tab 4: Kualitas Data ─────────────────────────────────
     with tab4:
@@ -771,7 +817,7 @@ def page_eda():
             ))
             fig.update_layout(title="Persentase Nilai 0 Tidak Valid",
                               height=310, plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, use_container_width=True)
+            show_chart(fig, use_container_width=True)
 
         # Outlier IQR
         st.markdown("---")
@@ -978,7 +1024,7 @@ def page_prediksi():
                     },
                 ))
                 fig.update_layout(height=300, paper_bgcolor="white")
-                st.plotly_chart(fig, use_container_width=True)
+                show_chart(fig, use_container_width=True)
 
             with g2:
                 # Risk factor summary
@@ -1112,7 +1158,7 @@ def page_evaluasi():
     fig.update_layout(barmode="group", yaxis_range=[0, 1.12],
                       height=450, plot_bgcolor="white", paper_bgcolor="white",
                       legend=dict(x=0.75, y=0.98))
-    st.plotly_chart(fig, use_container_width=True)
+    show_chart(fig, use_container_width=True)
 
     # ── Radar chart ──
     st.markdown("### 🕸️ Radar Chart")
@@ -1130,7 +1176,7 @@ def page_evaluasi():
         height=450, plot_bgcolor="white", paper_bgcolor="white",
         legend=dict(x=0.82, y=1.0),
     )
-    st.plotly_chart(fig, use_container_width=True)
+    show_chart(fig, use_container_width=True)
 
     # ── Confusion Matrices (tabs) ──
     st.markdown("### 🎯 Confusion Matrix")
@@ -1154,7 +1200,7 @@ def page_evaluasi():
                     title=f"Confusion Matrix – {mn}<br>F1-Score = {f1v:.4f}",
                     height=400, plot_bgcolor="white", paper_bgcolor="white",
                 )
-                st.plotly_chart(fig, use_container_width=True)
+                show_chart(fig, use_container_width=True)
 
             with c2:
                 sens = tp / (tp+fn) if (tp+fn) > 0 else 0
@@ -1203,7 +1249,7 @@ def page_evaluasi():
                       xaxis_range=[0,1], yaxis_range=[0,1.05],
                       height=500, plot_bgcolor='white', paper_bgcolor='white',
                       legend=dict(x=0.5, y=0.1))
-    st.plotly_chart(fig, use_container_width=True)
+    show_chart(fig, use_container_width=True)
 
 # ═══════════════════════════════════════════════════════════════
 # PAGE 5 – INTERPRETASI & BISNIS
@@ -1254,16 +1300,16 @@ def page_interpretasi():
         return fig
 
     with t1:
-        st.plotly_chart(fi_bar(fi,'logistic_regression',None,
+        show_chart(fi_bar(fi,'logistic_regression',None,
             "Logistic Regression – Koefisien Fitur","Koefisien"),
             use_container_width=True)
         st.info("Merah = meningkatkan risiko diabetes · Biru = mengurangi risiko diabetes.")
     with t2:
-        st.plotly_chart(fi_bar(fi,'random_forest',COLORS['secondary'],
+        show_chart(fi_bar(fi,'random_forest',COLORS['secondary'],
             "Random Forest – Feature Importances","Importance Score"),
             use_container_width=True)
     with t3:
-        st.plotly_chart(fi_bar(fi,'gradient_boosting',COLORS['accent'],
+        show_chart(fi_bar(fi,'gradient_boosting',COLORS['accent'],
             "Gradient Boosting – Feature Importances","Importance Score"),
             use_container_width=True)
 
