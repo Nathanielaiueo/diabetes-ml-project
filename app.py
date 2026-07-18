@@ -253,6 +253,20 @@ html, body, * { font-family: 'Inter', sans-serif !important; }
     font-weight: 800; font-size: 1rem; color: white !important; flex-shrink: 0;
 }
 
+/* ── Code blocks — background terang, teks hitam ── */
+[data-testid="stCode"],
+[data-testid="stCode"] pre,
+[data-testid="stCode"] code,
+[data-testid="stCodeBlock"],
+[data-testid="stCodeBlock"] pre,
+[data-testid="stCodeBlock"] code,
+[class*="CodeBlock"],
+[class*="stCodeBlock"] {
+    background: #f4f6fa !important;
+    color: #111111 !important;
+    border: 1px solid #d1d5db !important;
+}
+
 /* ── Hide Streamlit default chrome ── */
 #MainMenu { visibility: hidden; }
 footer    { visibility: hidden; }
@@ -1554,65 +1568,58 @@ def page_dokumentasi():
 
     with t3:
         st.markdown("### 🚀 Cara Penggunaan")
-        st.markdown("""
-        <pre style="background:#f4f6fa;border:1px solid #d1d5db;border-radius:10px;
-                    padding:1.2rem 1.4rem;font-family:'Courier New',monospace;
-                    font-size:.83rem;color:#111111;line-height:1.75;
-                    overflow-x:auto;white-space:pre;">
-<span style="color:#6B7280;"># 1. Clone repository</span>
+        st.code("""
+# 1. Clone repository
 git clone https://github.com/Nathanielaiueo/diabetes-ml-project.git
 cd diabetes-ml-project
 
-<span style="color:#6B7280;"># 2. Buat virtual environment (opsional, sangat disarankan)</span>
+# 2. Buat virtual environment (opsional, sangat disarankan)
 python -m venv venv
-venv\\Scripts\\activate        <span style="color:#6B7280;"># Windows</span>
-<span style="color:#6B7280;"># source venv/bin/activate  # Linux/Mac</span>
+venv\\Scripts\\activate        # Windows
+# source venv/bin/activate    # Linux/Mac
 
-<span style="color:#6B7280;"># 3. Install semua dependensi</span>
+# 3. Install semua dependensi
 pip install -r requirements.txt
 
-<span style="color:#6B7280;"># 4. Jalankan pipeline training (download data + latih 3 model + simpan hasil)</span>
+# 4. Jalankan pipeline training (download data + latih 3 model + simpan hasil)
 python train.py
 
-<span style="color:#6B7280;"># 5. Jalankan aplikasi Streamlit</span>
+# 5. Jalankan aplikasi Streamlit
 streamlit run app.py
 
-<span style="color:#6B7280;"># 6. Buka browser (otomatis terbuka atau manual)</span>
-<span style="color:#6B7280;">#    http://localhost:8501</span></pre>
-        """, unsafe_allow_html=True)
+# 6. Buka browser (otomatis terbuka atau manual)
+#    http://localhost:8501
+        """, language="bash")
 
         st.markdown("### 📁 Struktur Repository")
-        st.markdown("""
-        <pre style="background:#f4f6fa;border:1px solid #d1d5db;border-radius:10px;
-                    padding:1.2rem 1.4rem;font-family:'Courier New',monospace;
-                    font-size:.83rem;color:#111111;line-height:1.9;
-                    overflow-x:auto;white-space:pre;">diabetes-ml-project/
-├── 📄 README.md                    <span style="color:#6B7280;"># Dokumentasi utama</span>
-├── 📄 requirements.txt             <span style="color:#6B7280;"># Dependensi Python</span>
-├── 📄 train.py                     <span style="color:#6B7280;"># Pipeline ML lengkap (soal 1-3)</span>
-├── 📄 app.py                       <span style="color:#6B7280;"># Aplikasi Streamlit (soal 4)</span>
+        st.code("""
+diabetes-ml-project/
+├── 📄 README.md                    # Dokumentasi utama
+├── 📄 requirements.txt             # Dependensi Python
+├── 📄 train.py                     # Pipeline ML lengkap (soal 1-3)
+├── 📄 app.py                       # Aplikasi Streamlit (soal 4)
 ├── 📄 .gitignore
 │
 ├── 📁 data/
-│   ├── diabetes.csv                <span style="color:#6B7280;"># Dataset original (Pima Indians)</span>
-│   └── diabetes_processed.csv     <span style="color:#6B7280;"># Dataset setelah preprocessing</span>
+│   ├── diabetes.csv                # Dataset original (Pima Indians)
+│   └── diabetes_processed.csv     # Dataset setelah preprocessing
 │
 ├── 📁 models/
-│   ├── best_model.pkl              <span style="color:#6B7280;"># Model terbaik (siap digunakan)</span>
-│   ├── logistic_regression.pkl     <span style="color:#6B7280;"># Model LR</span>
-│   ├── random_forest.pkl           <span style="color:#6B7280;"># Model RF</span>
-│   ├── gradient_boosting.pkl       <span style="color:#6B7280;"># Model GB</span>
-│   ├── scaler.pkl                  <span style="color:#6B7280;"># StandardScaler yang sudah di-fit</span>
-│   ├── results.json                <span style="color:#6B7280;"># Hasil evaluasi semua model</span>
-│   ├── feature_info.json           <span style="color:#6B7280;"># Informasi nama fitur</span>
-│   └── feature_importances.json   <span style="color:#6B7280;"># Feature importance per model</span>
+│   ├── best_model.pkl              # Model terbaik (siap digunakan)
+│   ├── logistic_regression.pkl     # Model LR
+│   ├── random_forest.pkl           # Model RF
+│   ├── gradient_boosting.pkl       # Model GB
+│   ├── scaler.pkl                  # StandardScaler yang sudah di-fit
+│   ├── results.json                # Hasil evaluasi semua model
+│   ├── feature_info.json           # Informasi nama fitur
+│   └── feature_importances.json   # Feature importance per model
 │
 ├── 📁 notebooks/
-│   └── 01_EDA_Preprocessing.ipynb <span style="color:#6B7280;"># Notebook EDA &amp; Preprocessing lengkap</span>
+│   └── 01_EDA_Preprocessing.ipynb # Notebook EDA & Preprocessing lengkap
 │
 └── 📁 reports/
-    ├── Laporan_Teknis.pdf          <span style="color:#6B7280;"># Laporan teknis (soal 5)</span>
-    └── figures/                   <span style="color:#6B7280;"># Grafik &amp; visualisasi</span>
+    ├── Laporan_Teknis.pdf          # Laporan teknis (soal 5)
+    └── figures/                   # Grafik & visualisasi
         ├── 01_class_distribution.png
         ├── 02_feature_distributions.png
         ├── 03_correlation_heatmap.png
@@ -1620,8 +1627,8 @@ streamlit run app.py
         ├── 05_confusion_matrices.png
         ├── 06_roc_curves.png
         ├── 07_feature_importance.png
-        └── 08_model_comparison.png</pre>
-        """, unsafe_allow_html=True)
+        └── 08_model_comparison.png
+        """, language="text")
 
         st.markdown("### 🧭 Panduan Halaman Aplikasi")
         pages_guide = [
